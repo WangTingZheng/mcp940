@@ -1,0 +1,17 @@
+***************
+*** 82,88 ****
+        }
+  
+        Entity entity = Minecraft.func_71410_x().func_175606_aa();
+-       if (lvt_2_2_ == null) {
+           p_178474_1_.func_178542_e();
+        } else {
+           p_178474_1_.func_178541_a(this.func_178475_b());
+--- 82,88 ----
+        }
+  
+        Entity entity = Minecraft.func_71410_x().func_175606_aa();
++       if (entity == null) {
+           p_178474_1_.func_178542_e();
+        } else {
+           p_178474_1_.func_178541_a(this.func_178475_b());

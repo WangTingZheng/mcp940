@@ -1,0 +1,11 @@
+diff -r -U 3 minecraft\net\minecraft\client\renderer\vertex\VertexFormat.java minecraft_patched\net\minecraft\client\renderer\vertex\VertexFormat.java
+--- minecraft\net\minecraft\client\renderer\vertex\VertexFormat.java
++++ minecraft_patched\net\minecraft\client\renderer\vertex\VertexFormat.java
+@@ -44,6 +44,7 @@
+       this.field_177353_d = 0;
+    }
+ 
++   @SuppressWarnings("incomplete-switch")
+    public VertexFormat func_181721_a(VertexFormatElement p_181721_1_) {
+       if (p_181721_1_.func_177374_g() && this.func_177341_i()) {
+          field_177357_a.warn("VertexFormat error: Trying to add a position VertexFormatElement when one already exists, ignoring.");

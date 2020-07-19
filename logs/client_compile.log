@@ -1,0 +1,304 @@
+src\minecraft\net\minecraft\network\NetworkManager.java:19: 警告: [deprecation] io.netty.channel.local中的LocalEventLoopGroup已过时
+import io.netty.channel.local.LocalEventLoopGroup;
+                             ^
+src\minecraft\net\minecraft\network\NetworkSystem.java:16: 警告: [deprecation] io.netty.channel.local中的LocalEventLoopGroup已过时
+import io.netty.channel.local.LocalEventLoopGroup;
+                             ^
+src\minecraft\net\minecraft\world\chunk\storage\AnvilSaveConverter.java:18: 警告: [deprecation] net.minecraft.util.text.translation中的I18n已过时
+import net.minecraft.util.text.translation.I18n;
+                                          ^
+src\minecraft\net\minecraft\network\NetworkManager.java:19: 警告: [deprecation] io.netty.channel.local中的LocalEventLoopGroup已过时
+import io.netty.channel.local.LocalEventLoopGroup;
+                             ^
+src\minecraft\net\minecraft\network\NetworkSystem.java:16: 警告: [deprecation] io.netty.channel.local中的LocalEventLoopGroup已过时
+import io.netty.channel.local.LocalEventLoopGroup;
+                             ^
+src\minecraft\net\minecraft\world\chunk\storage\AnvilSaveConverter.java:18: 警告: [deprecation] net.minecraft.util.text.translation中的I18n已过时
+import net.minecraft.util.text.translation.I18n;
+                                          ^
+src\minecraft\net\minecraft\network\NetworkManager.java:19: 警告: [deprecation] io.netty.channel.local中的LocalEventLoopGroup已过时
+import io.netty.channel.local.LocalEventLoopGroup;
+                             ^
+src\minecraft\net\minecraft\network\NetworkSystem.java:16: 警告: [deprecation] io.netty.channel.local中的LocalEventLoopGroup已过时
+import io.netty.channel.local.LocalEventLoopGroup;
+                             ^
+src\minecraft\net\minecraft\world\chunk\storage\AnvilSaveConverter.java:18: 警告: [deprecation] net.minecraft.util.text.translation中的I18n已过时
+import net.minecraft.util.text.translation.I18n;
+                                          ^
+src\minecraft\net\minecraft\item\ItemStack.java:689: 警告: [deprecation] net.minecraft.util.text.translation中的I18n已过时
+                return I18n.translateToLocal(nbttagcompound.getString("LocName"));
+                       ^
+src\minecraft\net\minecraft\item\ItemStack.java:689: 警告: [deprecation] I18n中的translateToLocal(String)已过时
+                return I18n.translateToLocal(nbttagcompound.getString("LocName"));
+                           ^
+src\minecraft\net\minecraft\item\ItemStack.java:819: 警告: [deprecation] net.minecraft.util.text.translation中的I18n已过时
+                        list.add(I18n.translateToLocalFormatted("item.color", String.format("#%06X", nbttagcompound1.getInteger("color"))));
+                                 ^
+src\minecraft\net\minecraft\item\ItemStack.java:819: 警告: [deprecation] I18n中的translateToLocalFormatted(String,Object...)已过时
+                        list.add(I18n.translateToLocalFormatted("item.color", String.format("#%06X", nbttagcompound1.getInteger("color"))));
+                                     ^
+src\minecraft\net\minecraft\item\ItemStack.java:823: 警告: [deprecation] net.minecraft.util.text.translation中的I18n已过时
+                        list.add(TextFormatting.ITALIC + I18n.translateToLocal("item.dyed"));
+                                                         ^
+src\minecraft\net\minecraft\item\ItemStack.java:823: 警告: [deprecation] I18n中的translateToLocal(String)已过时
+                        list.add(TextFormatting.ITALIC + I18n.translateToLocal("item.dyed"));
+                                                             ^
+src\minecraft\net\minecraft\item\ItemStack.java:849: 警告: [deprecation] net.minecraft.util.text.translation中的I18n已过时
+                list.add(I18n.translateToLocal("item.modifiers." + entityequipmentslot.getName()));
+                         ^
+src\minecraft\net\minecraft\item\ItemStack.java:849: 警告: [deprecation] I18n中的translateToLocal(String)已过时
+                list.add(I18n.translateToLocal("item.modifiers." + entityequipmentslot.getName()));
+                             ^
+src\minecraft\net\minecraft\item\ItemStack.java:885: 警告: [deprecation] net.minecraft.util.text.translation中的I18n已过时
+                        list.add(" " + I18n.translateToLocalFormatted("attribute.modifier.equals." + attributemodifier.getOperation(), DECIMALFORMAT.format(d1), I18n.translateToLocal("attribute.name." + (String)entry.getKey())));
+                                                                                                                                                                 ^
+src\minecraft\net\minecraft\item\ItemStack.java:885: 警告: [deprecation] I18n中的translateToLocal(String)已过时
+                        list.add(" " + I18n.translateToLocalFormatted("attribute.modifier.equals." + attributemodifier.getOperation(), DECIMALFORMAT.format(d1), I18n.translateToLocal("attribute.name." + (String)entry.getKey())));
+                                                                                                                                                                     ^
+src\minecraft\net\minecraft\item\ItemStack.java:885: 警告: [deprecation] net.minecraft.util.text.translation中的I18n已过时
+                        list.add(" " + I18n.translateToLocalFormatted("attribute.modifier.equals." + attributemodifier.getOperation(), DECIMALFORMAT.format(d1), I18n.translateToLocal("attribute.name." + (String)entry.getKey())));
+                                       ^
+src\minecraft\net\minecraft\item\ItemStack.java:885: 警告: [deprecation] I18n中的translateToLocalFormatted(String,Object...)已过时
+                        list.add(" " + I18n.translateToLocalFormatted("attribute.modifier.equals." + attributemodifier.getOperation(), DECIMALFORMAT.format(d1), I18n.translateToLocal("attribute.name." + (String)entry.getKey())));
+                                           ^
+src\minecraft\net\minecraft\item\ItemStack.java:889: 警告: [deprecation] net.minecraft.util.text.translation中的I18n已过时
+                        list.add(TextFormatting.BLUE + " " + I18n.translateToLocalFormatted("attribute.modifier.plus." + attributemodifier.getOperation(), DECIMALFORMAT.format(d1), I18n.translateToLocal("attribute.name." + (String)entry.getKey())));
+                                                                                                                                                                                     ^
+src\minecraft\net\minecraft\item\ItemStack.java:889: 警告: [deprecation] I18n中的translateToLocal(String)已过时
+                        list.add(TextFormatting.BLUE + " " + I18n.translateToLocalFormatted("attribute.modifier.plus." + attributemodifier.getOperation(), DECIMALFORMAT.format(d1), I18n.translateToLocal("attribute.name." + (String)entry.getKey())));
+                                                                                                                                                                                         ^
+src\minecraft\net\minecraft\item\ItemStack.java:889: 警告: [deprecation] net.minecraft.util.text.translation中的I18n已过时
+                        list.add(TextFormatting.BLUE + " " + I18n.translateToLocalFormatted("attribute.modifier.plus." + attributemodifier.getOperation(), DECIMALFORMAT.format(d1), I18n.translateToLocal("attribute.name." + (String)entry.getKey())));
+                                                             ^
+src\minecraft\net\minecraft\item\ItemStack.java:889: 警告: [deprecation] I18n中的translateToLocalFormatted(String,Object...)已过时
+                        list.add(TextFormatting.BLUE + " " + I18n.translateToLocalFormatted("attribute.modifier.plus." + attributemodifier.getOperation(), DECIMALFORMAT.format(d1), I18n.translateToLocal("attribute.name." + (String)entry.getKey())));
+                                                                 ^
+src\minecraft\net\minecraft\item\ItemStack.java:894: 警告: [deprecation] net.minecraft.util.text.translation中的I18n已过时
+                        list.add(TextFormatting.RED + " " + I18n.translateToLocalFormatted("attribute.modifier.take." + attributemodifier.getOperation(), DECIMALFORMAT.format(d1), I18n.translateToLocal("attribute.name." + (String)entry.getKey())));
+                                                                                                                                                                                    ^
+src\minecraft\net\minecraft\item\ItemStack.java:894: 警告: [deprecation] I18n中的translateToLocal(String)已过时
+                        list.add(TextFormatting.RED + " " + I18n.translateToLocalFormatted("attribute.modifier.take." + attributemodifier.getOperation(), DECIMALFORMAT.format(d1), I18n.translateToLocal("attribute.name." + (String)entry.getKey())));
+                                                                                                                                                                                        ^
+src\minecraft\net\minecraft\item\ItemStack.java:894: 警告: [deprecation] net.minecraft.util.text.translation中的I18n已过时
+                        list.add(TextFormatting.RED + " " + I18n.translateToLocalFormatted("attribute.modifier.take." + attributemodifier.getOperation(), DECIMALFORMAT.format(d1), I18n.translateToLocal("attribute.name." + (String)entry.getKey())));
+                                                            ^
+src\minecraft\net\minecraft\item\ItemStack.java:894: 警告: [deprecation] I18n中的translateToLocalFormatted(String,Object...)已过时
+                        list.add(TextFormatting.RED + " " + I18n.translateToLocalFormatted("attribute.modifier.take." + attributemodifier.getOperation(), DECIMALFORMAT.format(d1), I18n.translateToLocal("attribute.name." + (String)entry.getKey())));
+                                                                ^
+src\minecraft\net\minecraft\item\ItemStack.java:902: 警告: [deprecation] net.minecraft.util.text.translation中的I18n已过时
+            list.add(TextFormatting.BLUE + I18n.translateToLocal("item.unbreakable"));
+                                           ^
+src\minecraft\net\minecraft\item\ItemStack.java:902: 警告: [deprecation] I18n中的translateToLocal(String)已过时
+            list.add(TextFormatting.BLUE + I18n.translateToLocal("item.unbreakable"));
+                                               ^
+src\minecraft\net\minecraft\item\ItemStack.java:912: 警告: [deprecation] net.minecraft.util.text.translation中的I18n已过时
+                list.add(TextFormatting.GRAY + I18n.translateToLocal("item.canBreak"));
+                                               ^
+src\minecraft\net\minecraft\item\ItemStack.java:912: 警告: [deprecation] I18n中的translateToLocal(String)已过时
+                list.add(TextFormatting.GRAY + I18n.translateToLocal("item.canBreak"));
+                                                   ^
+src\minecraft\net\minecraft\item\ItemStack.java:937: 警告: [deprecation] net.minecraft.util.text.translation中的I18n已过时
+                list.add(TextFormatting.GRAY + I18n.translateToLocal("item.canPlace"));
+                                               ^
+src\minecraft\net\minecraft\item\ItemStack.java:937: 警告: [deprecation] I18n中的translateToLocal(String)已过时
+                list.add(TextFormatting.GRAY + I18n.translateToLocal("item.canPlace"));
+                                                   ^
+src\minecraft\net\minecraft\item\ItemStack.java:959: 警告: [deprecation] net.minecraft.util.text.translation中的I18n已过时
+                list.add(I18n.translateToLocalFormatted("item.durability", this.getMaxDamage() - this.getItemDamage(), this.getMaxDamage()));
+                         ^
+src\minecraft\net\minecraft\item\ItemStack.java:959: 警告: [deprecation] I18n中的translateToLocalFormatted(String,Object...)已过时
+                list.add(I18n.translateToLocalFormatted("item.durability", this.getMaxDamage() - this.getItemDamage(), this.getMaxDamage()));
+                             ^
+src\minecraft\net\minecraft\item\ItemStack.java:966: 警告: [deprecation] net.minecraft.util.text.translation中的I18n已过时
+                list.add(TextFormatting.DARK_GRAY + I18n.translateToLocalFormatted("item.nbt_tags", this.getTagCompound().getKeySet().size()));
+                                                    ^
+src\minecraft\net\minecraft\item\ItemStack.java:966: 警告: [deprecation] I18n中的translateToLocalFormatted(String,Object...)已过时
+                list.add(TextFormatting.DARK_GRAY + I18n.translateToLocalFormatted("item.nbt_tags", this.getTagCompound().getKeySet().size()));
+                                                        ^
+src\minecraft\net\minecraft\network\PacketBuffer.java:493: 警告: [deprecation] ByteBuf中的order(ByteOrder)已过时
+    public ByteBuf order(ByteOrder p_order_1_)
+                   ^
+src\minecraft\net\minecraft\network\PacketBuffer.java:488: 警告: [deprecation] ByteBuf中的order()已过时
+    public ByteOrder order()
+                     ^
+src\minecraft\net\minecraft\network\PacketBuffer.java:490: 警告: [deprecation] ByteBuf中的order()已过时
+        return this.buf.order();
+                       ^
+src\minecraft\net\minecraft\network\PacketBuffer.java:495: 警告: [deprecation] ByteBuf中的order(ByteOrder)已过时
+        return this.buf.order(p_order_1_);
+                       ^
+src\minecraft\net\minecraft\entity\Entity.java:2806: 警告: [deprecation] net.minecraft.util.text.translation中的I18n已过时
+            return I18n.translateToLocal("entity." + s + ".name");
+                   ^
+src\minecraft\net\minecraft\entity\Entity.java:2806: 警告: [deprecation] I18n中的translateToLocal(String)已过时
+            return I18n.translateToLocal("entity." + s + ".name");
+                       ^
+src\minecraft\net\minecraft\item\Item.java:355: 警告: [deprecation] net.minecraft.util.text.translation中的I18n已过时
+        return I18n.translateToLocal(this.getUnlocalizedName(stack));
+               ^
+src\minecraft\net\minecraft\item\Item.java:355: 警告: [deprecation] I18n中的translateToLocal(String)已过时
+        return I18n.translateToLocal(this.getUnlocalizedName(stack));
+                   ^
+src\minecraft\net\minecraft\item\Item.java:458: 警告: [deprecation] net.minecraft.util.text.translation中的I18n已过时
+        return I18n.translateToLocal(this.getUnlocalizedNameInefficiently(stack) + ".name").trim();
+               ^
+src\minecraft\net\minecraft\item\Item.java:458: 警告: [deprecation] I18n中的translateToLocal(String)已过时
+        return I18n.translateToLocal(this.getUnlocalizedNameInefficiently(stack) + ".name").trim();
+                   ^
+src\minecraft\net\minecraft\block\Block.java:964: 警告: [deprecation] net.minecraft.util.text.translation中的I18n已过时
+        return I18n.translateToLocal(this.getUnlocalizedName() + ".name");
+               ^
+src\minecraft\net\minecraft\block\Block.java:964: 警告: [deprecation] I18n中的translateToLocal(String)已过时
+        return I18n.translateToLocal(this.getUnlocalizedName() + ".name");
+                   ^
+src\minecraft\net\minecraft\enchantment\Enchantment.java:177: 警告: [deprecation] net.minecraft.util.text.translation中的I18n已过时
+        String s = I18n.translateToLocal(this.getName());
+                   ^
+src\minecraft\net\minecraft\enchantment\Enchantment.java:177: 警告: [deprecation] I18n中的translateToLocal(String)已过时
+        String s = I18n.translateToLocal(this.getName());
+                       ^
+src\minecraft\net\minecraft\enchantment\Enchantment.java:184: 警告: [deprecation] net.minecraft.util.text.translation中的I18n已过时
+        return level == 1 && this.getMaxLevel() == 1 ? s : s + " " + I18n.translateToLocal("enchantment.level." + level);
+                                                                     ^
+src\minecraft\net\minecraft\enchantment\Enchantment.java:184: 警告: [deprecation] I18n中的translateToLocal(String)已过时
+        return level == 1 && this.getMaxLevel() == 1 ? s : s + " " + I18n.translateToLocal("enchantment.level." + level);
+                                                                         ^
+src\minecraft\net\minecraft\stats\StatisticsManagerServer.java:46: 警告: [deprecation] FileUtils中的readFileToString(File)已过时
+                this.statsData.putAll(this.parseJson(FileUtils.readFileToString(this.statsFile)));
+                                                              ^
+src\minecraft\net\minecraft\stats\StatisticsManagerServer.java:63: 警告: [deprecation] FileUtils中的writeStringToFile(File,String)已过时
+            FileUtils.writeStringToFile(this.statsFile, dumpJson(this.statsData));
+                     ^
+src\minecraft\net\minecraft\util\DamageSource.java:238: 警告: [deprecation] net.minecraft.util.text.translation中的I18n已过时
+        return entitylivingbase != null && I18n.canTranslate(s1) ? new TextComponentTranslation(s1, new Object[] {entityLivingBaseIn.getDisplayName(), entitylivingbase.getDisplayName()}) : new TextComponentTranslation(s, new Object[] {entityLivingBaseIn.getDisplayName()});
+                                           ^
+src\minecraft\net\minecraft\util\DamageSource.java:238: 警告: [deprecation] I18n中的canTranslate(String)已过时
+        return entitylivingbase != null && I18n.canTranslate(s1) ? new TextComponentTranslation(s1, new Object[] {entityLivingBaseIn.getDisplayName(), entitylivingbase.getDisplayName()}) : new TextComponentTranslation(s, new Object[] {entityLivingBaseIn.getDisplayName()});
+                                               ^
+src\minecraft\net\minecraft\potion\PotionEffect.java:268: 警告: [deprecation] ComparisonChain中的compare(Boolean,Boolean)已过时
+        return (this.getDuration() <= 32147 || p_compareTo_1_.getDuration() <= 32147) && (!this.getIsAmbient() || !p_compareTo_1_.getIsAmbient()) ? ComparisonChain.start().compare(Boolean.valueOf(this.getIsAmbient()), Boolean.valueOf(p_compareTo_1_.getIsAmbient())).compare(this.getDuration(), p_compareTo_1_.getDuration()).compare(this.getPotion().getLiquidColor(), p_compareTo_1_.getPotion().getLiquidColor()).result() : ComparisonChain.start().compare(Boolean.valueOf(this.getIsAmbient()), Boolean.valueOf(p_compareTo_1_.getIsAmbient())).compare(this.getPotion().getLiquidColor(), p_compareTo_1_.getPotion().getLiquidColor()).result();
+                                                                                                                                                                           ^
+src\minecraft\net\minecraft\potion\PotionEffect.java:268: 警告: [deprecation] ComparisonChain中的compare(Boolean,Boolean)已过时
+        return (this.getDuration() <= 32147 || p_compareTo_1_.getDuration() <= 32147) && (!this.getIsAmbient() || !p_compareTo_1_.getIsAmbient()) ? ComparisonChain.start().compare(Boolean.valueOf(this.getIsAmbient()), Boolean.valueOf(p_compareTo_1_.getIsAmbient())).compare(this.getDuration(), p_compareTo_1_.getDuration()).compare(this.getPotion().getLiquidColor(), p_compareTo_1_.getPotion().getLiquidColor()).result() : ComparisonChain.start().compare(Boolean.valueOf(this.getIsAmbient()), Boolean.valueOf(p_compareTo_1_.getIsAmbient())).compare(this.getPotion().getLiquidColor(), p_compareTo_1_.getPotion().getLiquidColor()).result();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                              ^
+src\minecraft\net\minecraft\entity\item\EntityItem.java:433: 警告: [deprecation] net.minecraft.util.text.translation中的I18n已过时
+        return this.hasCustomName() ? this.getCustomNameTag() : I18n.translateToLocal("item." + this.getEntityItem().getUnlocalizedName());
+                                                                ^
+src\minecraft\net\minecraft\entity\item\EntityItem.java:433: 警告: [deprecation] I18n中的translateToLocal(String)已过时
+        return this.hasCustomName() ? this.getCustomNameTag() : I18n.translateToLocal("item." + this.getEntityItem().getUnlocalizedName());
+                                                                    ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:275: 警告: [deprecation] Block中的getMaterial(IBlockState)已过时
+            return this.block.getMaterial(this);
+                             ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:280: 警告: [deprecation] Block中的isFullBlock(IBlockState)已过时
+            return this.block.isFullBlock(this);
+                             ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:285: 警告: [deprecation] Block中的canEntitySpawn(IBlockState,Entity)已过时
+            return this.block.canEntitySpawn(this, entityIn);
+                             ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:290: 警告: [deprecation] Block中的getLightOpacity(IBlockState)已过时
+            return this.block.getLightOpacity(this);
+                             ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:295: 警告: [deprecation] Block中的getLightValue(IBlockState)已过时
+            return this.block.getLightValue(this);
+                             ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:300: 警告: [deprecation] Block中的isTranslucent(IBlockState)已过时
+            return this.block.isTranslucent(this);
+                             ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:305: 警告: [deprecation] Block中的getUseNeighborBrightness(IBlockState)已过时
+            return this.block.getUseNeighborBrightness(this);
+                             ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:310: 警告: [deprecation] Block中的getMapColor(IBlockState,IBlockAccess,BlockPos)已过时
+            return this.block.getMapColor(this, p_185909_1_, p_185909_2_);
+                             ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:315: 警告: [deprecation] Block中的withRotation(IBlockState,Rotation)已过时
+            return this.block.withRotation(this, rot);
+                             ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:320: 警告: [deprecation] Block中的withMirror(IBlockState,Mirror)已过时
+            return this.block.withMirror(this, mirrorIn);
+                             ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:325: 警告: [deprecation] Block中的isFullCube(IBlockState)已过时
+            return this.block.isFullCube(this);
+                             ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:330: 警告: [deprecation] Block中的func_190946_v(IBlockState)已过时
+            return this.block.func_190946_v(this);
+                             ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:335: 警告: [deprecation] Block中的getRenderType(IBlockState)已过时
+            return this.block.getRenderType(this);
+                             ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:340: 警告: [deprecation] Block中的getPackedLightmapCoords(IBlockState,IBlockAccess,BlockPos)已过时
+            return this.block.getPackedLightmapCoords(this, source, pos);
+                             ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:345: 警告: [deprecation] Block中的getAmbientOcclusionLightValue(IBlockState)已过时
+            return this.block.getAmbientOcclusionLightValue(this);
+                             ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:350: 警告: [deprecation] Block中的isBlockNormalCube(IBlockState)已过时
+            return this.block.isBlockNormalCube(this);
+                             ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:355: 警告: [deprecation] Block中的isNormalCube(IBlockState)已过时
+            return this.block.isNormalCube(this);
+                             ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:360: 警告: [deprecation] Block中的canProvidePower(IBlockState)已过时
+            return this.block.canProvidePower(this);
+                             ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:365: 警告: [deprecation] Block中的getWeakPower(IBlockState,IBlockAccess,BlockPos,EnumFacing)已过时
+            return this.block.getWeakPower(this, blockAccess, pos, side);
+                             ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:370: 警告: [deprecation] Block中的hasComparatorInputOverride(IBlockState)已过时
+            return this.block.hasComparatorInputOverride(this);
+                             ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:375: 警告: [deprecation] Block中的getComparatorInputOverride(IBlockState,World,BlockPos)已过时
+            return this.block.getComparatorInputOverride(this, worldIn, pos);
+                             ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:380: 警告: [deprecation] Block中的getBlockHardness(IBlockState,World,BlockPos)已过时
+            return this.block.getBlockHardness(this, worldIn, pos);
+                             ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:385: 警告: [deprecation] Block中的getPlayerRelativeBlockHardness(IBlockState,EntityPlayer,World,BlockPos)已过时
+            return this.block.getPlayerRelativeBlockHardness(this, player, worldIn, pos);
+                             ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:390: 警告: [deprecation] Block中的getStrongPower(IBlockState,IBlockAccess,BlockPos,EnumFacing)已过时
+            return this.block.getStrongPower(this, blockAccess, pos, side);
+                             ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:395: 警告: [deprecation] Block中的getMobilityFlag(IBlockState)已过时
+            return this.block.getMobilityFlag(this);
+                             ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:400: 警告: [deprecation] Block中的getActualState(IBlockState,IBlockAccess,BlockPos)已过时
+            return this.block.getActualState(this, blockAccess, pos);
+                             ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:405: 警告: [deprecation] Block中的getSelectedBoundingBox(IBlockState,World,BlockPos)已过时
+            return this.block.getSelectedBoundingBox(this, worldIn, pos);
+                             ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:410: 警告: [deprecation] Block中的shouldSideBeRendered(IBlockState,IBlockAccess,BlockPos,EnumFacing)已过时
+            return this.block.shouldSideBeRendered(this, blockAccess, pos, facing);
+                             ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:415: 警告: [deprecation] Block中的isOpaqueCube(IBlockState)已过时
+            return this.block.isOpaqueCube(this);
+                             ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:421: 警告: [deprecation] Block中的getCollisionBoundingBox(IBlockState,IBlockAccess,BlockPos)已过时
+            return this.block.getCollisionBoundingBox(this, worldIn, pos);
+                             ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:426: 警告: [deprecation] Block中的addCollisionBoxToList(IBlockState,World,BlockPos,AxisAlignedBB,List<AxisAlignedBB>,Entity,boolean)已过时
+            this.block.addCollisionBoxToList(this, worldIn, pos, p_185908_3_, p_185908_4_, p_185908_5_, p_185908_6_);
+                      ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:431: 警告: [deprecation] Block中的getBoundingBox(IBlockState,IBlockAccess,BlockPos)已过时
+            return this.block.getBoundingBox(this, blockAccess, pos);
+                             ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:436: 警告: [deprecation] Block中的collisionRayTrace(IBlockState,World,BlockPos,Vec3d,Vec3d)已过时
+            return this.block.collisionRayTrace(this, worldIn, pos, start, end);
+                             ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:441: 警告: [deprecation] Block中的isFullyOpaque(IBlockState)已过时
+            return this.block.isFullyOpaque(this);
+                             ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:446: 警告: [deprecation] Block中的func_190949_e(IBlockState,IBlockAccess,BlockPos)已过时
+            return this.block.func_190949_e(this, p_191059_1_, p_191059_2_);
+                             ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:451: 警告: [deprecation] Block中的eventReceived(IBlockState,World,BlockPos,int,int)已过时
+            return this.block.eventReceived(this, worldIn, pos, id, param);
+                             ^
+src\minecraft\net\minecraft\block\state\BlockStateContainer.java:456: 警告: [deprecation] Block中的neighborChanged(IBlockState,World,BlockPos,Block,BlockPos)已过时
+            this.block.neighborChanged(this, worldIn, pos, blockIn, p_189546_4_);
+                      ^
+注: 某些输入文件还使用或覆盖了已过时的 API。
+注: 某些输入文件使用了未经检查或不安全的操作。
+注: 有关详细信息, 请使用 -Xlint:unchecked 重新编译。
+100 个警告

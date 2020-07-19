@@ -1,0 +1,27 @@
+***************
+*** 24,35 ****
+        }
+  
+        private <T extends Comparable<T>> String func_185886_a(IProperty<T> p_185886_1_, Comparable<?> p_185886_2_) {
+-          return p_185886_1_.func_177702_a(p_185886_2_);
+        }
+     };
+  
+     public <T extends Comparable<T>> IBlockState func_177231_a(IProperty<T> p_177231_1_) {
+-       return this.func_177226_a(p_177231_1_, (Comparable)func_177232_a(p_177231_1_.func_177700_c(), this.func_177229_b(p_177231_1_)));
+     }
+  
+     protected static <T> T func_177232_a(Collection<T> p_177232_0_, T p_177232_1_) {
+--- 24,35 ----
+        }
+  
+        private <T extends Comparable<T>> String func_185886_a(IProperty<T> p_185886_1_, Comparable<?> p_185886_2_) {
++          return p_185886_1_.func_177702_a((T)p_185886_2_);
+        }
+     };
+  
+     public <T extends Comparable<T>> IBlockState func_177231_a(IProperty<T> p_177231_1_) {
++       return this.func_177226_a(p_177231_1_, func_177232_a(p_177231_1_.func_177700_c(), this.func_177229_b(p_177231_1_)));
+     }
+  
+     protected static <T> T func_177232_a(Collection<T> p_177232_0_, T p_177232_1_) {

@@ -1,0 +1,12 @@
+diff -r -U 3 minecraft\net\minecraft\client\resources\SimpleResource.java minecraft_patched\net\minecraft\client\resources\SimpleResource.java
+--- minecraft\net\minecraft\client\resources\SimpleResource.java
++++ minecraft_patched\net\minecraft\client\resources\SimpleResource.java
+@@ -66,7 +66,7 @@
+             }
+          }
+ 
+-         T t = this.field_110535_a.get(p_110526_1_);
++         T t = (T)this.field_110535_a.get(p_110526_1_);
+          if (t == null) {
+             t = this.field_110532_e.func_110503_a(p_110526_1_, this.field_110530_g);
+          }

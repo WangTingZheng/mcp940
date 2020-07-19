@@ -1,0 +1,30 @@
+diff -r -U 3 minecraft_server\net\minecraft\entity\Entity.java minecraft_server_patched\net\minecraft\entity\Entity.java
+--- minecraft_server\net\minecraft\entity\Entity.java
++++ minecraft_server_patched\net\minecraft\entity\Entity.java
+@@ -568,7 +568,7 @@
+             }
+          }
+ 
+-         boolean flag = this.field_70122_E || p_70091_4_ != p_70091_4_ && p_70091_4_ < 0.0D;
++         boolean flag = this.field_70122_E || d3 != p_70091_4_ && d3 < 0.0D;
+          if (this.field_70138_W > 0.0F && flag && (d2 != p_70091_2_ || d4 != p_70091_6_)) {
+             double d14 = p_70091_2_;
+             double d6 = p_70091_4_;
+@@ -661,7 +661,7 @@
+          this.field_70170_p.field_72984_F.func_76320_a("rest");
+          this.func_174829_m();
+          this.field_70123_F = d2 != p_70091_2_ || d4 != p_70091_6_;
+-         this.field_70124_G = p_70091_4_ != p_70091_4_;
++         this.field_70124_G = d3 != p_70091_4_;
+          this.field_70122_E = this.field_70124_G && d3 < 0.0D;
+          this.field_70132_H = this.field_70123_F || this.field_70124_G;
+          int j6 = MathHelper.func_76128_c(this.field_70165_t);
+@@ -2233,7 +2233,7 @@
+    private <T extends Entity> void func_184175_a(Class<T> p_184175_1_, Set<T> p_184175_2_) {
+       for(Entity entity : this.func_184188_bt()) {
+          if (p_184175_1_.isAssignableFrom(entity.getClass())) {
+-            p_184175_2_.add(entity);
++            p_184175_2_.add((T)entity);
+          }
+ 
+          entity.func_184175_a(p_184175_1_, p_184175_2_);

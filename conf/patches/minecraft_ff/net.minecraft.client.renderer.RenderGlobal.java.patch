@@ -1,0 +1,11 @@
+diff -r -U 3 minecraft\net\minecraft\client\renderer\RenderGlobal.java minecraft_patched\net\minecraft\client\renderer\RenderGlobal.java
+--- minecraft\net\minecraft\client\renderer\RenderGlobal.java
++++ minecraft_patched\net\minecraft\client\renderer\RenderGlobal.java
+@@ -917,6 +917,7 @@
+       return l;
+    }
+ 
++   @SuppressWarnings("incomplete-switch")
+    private void func_174982_a(BlockRenderLayer p_174982_1_) {
+       this.field_72777_q.field_71460_t.func_180436_i();
+       if (OpenGlHelper.func_176075_f()) {

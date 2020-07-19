@@ -1,0 +1,11 @@
+diff -r -U 3 minecraft_server\net\minecraft\network\play\server\SPacketCombatEvent.java minecraft_server_patched\net\minecraft\network\play\server\SPacketCombatEvent.java
+--- minecraft_server\net\minecraft\network\play\server\SPacketCombatEvent.java
++++ minecraft_server_patched\net\minecraft\network\play\server\SPacketCombatEvent.java
+@@ -23,6 +23,7 @@
+       this(p_i46931_1_, p_i46931_2_, true);
+    }
+ 
++   @SuppressWarnings("incomplete-switch")
+    public SPacketCombatEvent(CombatTracker p_i46932_1_, SPacketCombatEvent.Event p_i46932_2_, boolean p_i46932_3_) {
+       this.field_179776_a = p_i46932_2_;
+       EntityLivingBase entitylivingbase = p_i46932_1_.func_94550_c();

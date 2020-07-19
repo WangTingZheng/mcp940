@@ -1,0 +1,12 @@
+diff -r -U 3 minecraft\net\minecraft\util\EnumTypeAdapterFactory.java minecraft_patched\net\minecraft\util\EnumTypeAdapterFactory.java
+--- minecraft\net\minecraft\util\EnumTypeAdapterFactory.java
++++ minecraft_patched\net\minecraft\util\EnumTypeAdapterFactory.java
+@@ -16,7 +16,7 @@
+ public class EnumTypeAdapterFactory implements TypeAdapterFactory {
+    @Nullable
+    public <T> TypeAdapter<T> create(Gson p_create_1_, TypeToken<T> p_create_2_) {
+-      Class<T> oclass = p_create_2_.getRawType();
++      Class<T> oclass = (Class<T>)p_create_2_.getRawType();
+       if (!oclass.isEnum()) {
+          return null;
+       } else {

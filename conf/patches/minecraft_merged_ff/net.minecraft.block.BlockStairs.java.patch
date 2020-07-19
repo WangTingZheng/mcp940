@@ -1,0 +1,11 @@
+diff -r -U 3 minecraft\net\minecraft\block\BlockStairs.java minecraft_patched\net\minecraft\block\BlockStairs.java
+--- minecraft\net\minecraft\block\BlockStairs.java
++++ minecraft_patched\net\minecraft\block\BlockStairs.java
+@@ -352,6 +352,7 @@
+       return p_185499_1_.func_177226_a(field_176309_a, p_185499_2_.func_185831_a((EnumFacing)p_185499_1_.func_177229_b(field_176309_a)));
+    }
+ 
++   @SuppressWarnings("incomplete-switch")
+    public IBlockState func_185471_a(IBlockState p_185471_1_, Mirror p_185471_2_) {
+       EnumFacing enumfacing = (EnumFacing)p_185471_1_.func_177229_b(field_176309_a);
+       BlockStairs.EnumShape blockstairs$enumshape = (BlockStairs.EnumShape)p_185471_1_.func_177229_b(field_176310_M);

@@ -1,0 +1,26 @@
+{
+  "+libraries": [
+    {
+      "name": "com.mumfrey:liteloader:1.8",
+      "MMC-absoluteUrl": "http://jenkins.liteloader.com/job/LiteLoader/lastSuccessfulBuild/artifact/build/dist/liteloader-1.8-SNAPSHOT.jar",
+      "MMC-depend": "hard",
+      "insert": "prepend"
+    },
+    {
+      "name": "net.minecraft:launchwrapper:1.11"
+    },
+    {
+      "name": "org.ow2.asm:asm-all:5.0.3",
+      "url": "http://repo.maven.apache.org/maven2/"
+    }
+  ],
+  "+tweakers": [
+    "com.mumfrey.liteloader.launch.LiteLoaderTweaker"
+  ],
+  "fileId": "com.mumfrey.liteloader",
+  "mainClass": "net.minecraft.launchwrapper.Launch",
+  "mcVersion": "1.8",
+  "name": "LiteLoader",
+  "order": 10,
+  "version": "1.8"
+}

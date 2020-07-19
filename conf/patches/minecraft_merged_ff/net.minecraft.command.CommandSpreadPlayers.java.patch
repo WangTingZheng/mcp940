@@ -1,0 +1,12 @@
+diff -r -U 3 minecraft\net\minecraft\command\CommandSpreadPlayers.java minecraft_patched\net\minecraft\command\CommandSpreadPlayers.java
+--- minecraft\net\minecraft\command\CommandSpreadPlayers.java
++++ minecraft_patched\net\minecraft\command\CommandSpreadPlayers.java
+@@ -97,7 +97,7 @@
+          if (entity instanceof EntityPlayer) {
+             set.add(entity.func_96124_cp());
+          } else {
+-            set.add((Object)null);
++            set.add(null);
+          }
+       }
+ 

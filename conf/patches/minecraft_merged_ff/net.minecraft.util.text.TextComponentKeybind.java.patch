@@ -1,0 +1,12 @@
+diff -r -U 3 minecraft\net\minecraft\util\text\TextComponentKeybind.java minecraft_patched\net\minecraft\util\text\TextComponentKeybind.java
+--- minecraft\net\minecraft\util\text\TextComponentKeybind.java
++++ minecraft_patched\net\minecraft\util\text\TextComponentKeybind.java
+@@ -6,7 +6,7 @@
+ public class TextComponentKeybind extends TextComponentBase {
+    public static Function<String, Supplier<String>> field_193637_b = (p_193635_0_) -> {
+       return () -> {
+-         return p_193634_0_;
++         return p_193635_0_;
+       };
+    };
+    private final String field_193638_c;

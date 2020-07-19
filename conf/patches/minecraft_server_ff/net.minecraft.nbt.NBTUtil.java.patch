@@ -1,0 +1,22 @@
+diff -r -U 3 minecraft_server\net\minecraft\nbt\NBTUtil.java minecraft_server_patched\net\minecraft\nbt\NBTUtil.java
+--- minecraft_server\net\minecraft\nbt\NBTUtil.java
++++ minecraft_server_patched\net\minecraft\nbt\NBTUtil.java
+@@ -200,7 +200,7 @@
+    private static <T extends Comparable<T>> IBlockState func_193590_a(IBlockState p_193590_0_, IProperty<T> p_193590_1_, String p_193590_2_, NBTTagCompound p_193590_3_, NBTTagCompound p_193590_4_) {
+       Optional<T> optional = p_193590_1_.func_185929_b(p_193590_3_.func_74779_i(p_193590_2_));
+       if (optional.isPresent()) {
+-         return p_193590_0_.func_177226_a(p_193590_1_, (Comparable)optional.get());
++         return p_193590_0_.func_177226_a(p_193590_1_, optional.get());
+       } else {
+          field_193591_a.warn("Unable to read property: {} with value: {} for blockstate: {}", p_193590_2_, p_193590_3_.func_74779_i(p_193590_2_), p_193590_4_.toString());
+          return p_193590_0_;
+@@ -225,7 +225,8 @@
+       return p_190009_0_;
+    }
+ 
++   @SuppressWarnings("unchecked")
+    private static <T extends Comparable<T>> String func_190010_a(IProperty<T> p_190010_0_, Comparable<?> p_190010_1_) {
+-      return p_190010_0_.func_177702_a(p_190010_1_);
++      return p_190010_0_.func_177702_a((T)p_190010_1_);
+    }
+ }

@@ -1,0 +1,12 @@
+diff -r -U 3 minecraft\net\minecraft\client\renderer\block\statemap\StateMap.java minecraft_patched\net\minecraft\client\renderer\block\statemap\StateMap.java
+--- minecraft\net\minecraft\client\renderer\block\statemap\StateMap.java
++++ minecraft_patched\net\minecraft\client\renderer\block\statemap\StateMap.java
+@@ -47,7 +47,7 @@
+    }
+ 
+    private <T extends Comparable<T>> String func_187490_a(IProperty<T> p_187490_1_, Map<IProperty<?>, Comparable<?>> p_187490_2_) {
+-      return p_187490_1_.func_177702_a(p_187490_2_.remove(this.field_178142_a));
++      return p_187490_1_.func_177702_a((T)p_187490_2_.remove(this.field_178142_a));
+    }
+ 
+    @SideOnly(Side.CLIENT)

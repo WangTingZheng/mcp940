@@ -1,0 +1,12 @@
+diff -r -U 3 minecraft_server\net\minecraft\command\CommandBase.java minecraft_server_patched\net\minecraft\command\CommandBase.java
+--- minecraft_server\net\minecraft\command\CommandBase.java
++++ minecraft_server_patched\net\minecraft\command\CommandBase.java
+@@ -432,7 +432,7 @@
+    }
+ 
+    private static <T extends Comparable<T>> IBlockState func_190793_a(IBlockState p_190793_0_, IProperty<T> p_190793_1_, Comparable<?> p_190793_2_) {
+-      return p_190793_0_.func_177226_a(p_190793_1_, p_190793_2_);
++      return p_190793_0_.func_177226_a(p_190793_1_, (T)p_190793_2_);
+    }
+ 
+    public static Predicate<IBlockState> func_190791_b(final Block p_190791_0_, String p_190791_1_) throws InvalidBlockStateException {

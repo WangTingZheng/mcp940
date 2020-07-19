@@ -1,0 +1,16 @@
+diff -r -U 3 minecraft\net\minecraft\client\util\SearchTree.java minecraft_patched\net\minecraft\client\util\SearchTree.java
+--- minecraft\net\minecraft\client\util\SearchTree.java
++++ minecraft_patched\net\minecraft\client\util\SearchTree.java
+@@ -47,10 +47,10 @@
+ 
+    private void func_194042_b(T p_194042_1_) {
+       (this.field_194047_d.apply(p_194042_1_)).forEach((p_194039_2_) -> {
+-         this.field_194045_b.func_194057_a(p_194039_1_, p_194039_2_.toString().toLowerCase(Locale.ROOT));
++         this.field_194045_b.func_194057_a(p_194042_1_, p_194039_2_.toString().toLowerCase(Locale.ROOT));
+       });
+       (this.field_194046_c.apply(p_194042_1_)).forEach((p_194041_2_) -> {
+-         this.field_194044_a.func_194057_a(p_194041_1_, p_194041_2_.toLowerCase(Locale.ROOT));
++         this.field_194044_a.func_194057_a(p_194042_1_, p_194041_2_.toLowerCase(Locale.ROOT));
+       });
+    }
+ 

@@ -1,0 +1,12 @@
+diff -r -U 3 minecraft\net\minecraft\network\EnumConnectionState.java minecraft_patched\net\minecraft\network\EnumConnectionState.java
+--- minecraft\net\minecraft\network\EnumConnectionState.java
++++ minecraft_patched\net\minecraft\network\EnumConnectionState.java
+@@ -323,7 +323,7 @@
+          field_150764_e[i - -1] = enumconnectionstate;
+ 
+          for(EnumPacketDirection enumpacketdirection : enumconnectionstate.field_179247_h.keySet()) {
+-            for(Class<? extends Packet<?>> oclass : ((BiMap)enumconnectionstate.field_179247_h.get(enumpacketdirection)).values()) {
++            for(Class<? extends Packet<?>> oclass : (enumconnectionstate.field_179247_h.get(enumpacketdirection)).values()) {
+                if (field_150761_f.containsKey(oclass) && field_150761_f.get(oclass) != enumconnectionstate) {
+                   throw new Error("Packet " + oclass + " is already assigned to protocol " + field_150761_f.get(oclass) + " - can't reassign to " + enumconnectionstate);
+                }

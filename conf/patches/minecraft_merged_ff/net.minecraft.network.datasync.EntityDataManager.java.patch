@@ -1,0 +1,12 @@
+diff -r -U 3 minecraft\net\minecraft\network\datasync\EntityDataManager.java minecraft_patched\net\minecraft\network\datasync\EntityDataManager.java
+--- minecraft\net\minecraft\network\datasync\EntityDataManager.java
++++ minecraft_patched\net\minecraft\network\datasync\EntityDataManager.java
+@@ -251,7 +251,7 @@
+ 
+    @SideOnly(Side.CLIENT)
+    protected <T> void func_187224_a(EntityDataManager.DataEntry<T> p_187224_1_, EntityDataManager.DataEntry<?> p_187224_2_) {
+-      p_187224_1_.func_187210_a(p_187224_2_.func_187206_b());
++      p_187224_1_.func_187210_a((T)p_187224_2_.func_187206_b());
+    }
+ 
+    public boolean func_187228_d() {

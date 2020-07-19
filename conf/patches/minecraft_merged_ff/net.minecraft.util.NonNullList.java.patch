@@ -1,0 +1,21 @@
+diff -r -U 3 minecraft\net\minecraft\util\NonNullList.java minecraft_patched\net\minecraft\util\NonNullList.java
+--- minecraft\net\minecraft\util\NonNullList.java
++++ minecraft_patched\net\minecraft\util\NonNullList.java
+@@ -20,7 +20,7 @@
+       Validate.notNull(p_191197_1_);
+       Object[] aobject = new Object[p_191197_0_];
+       Arrays.fill(aobject, p_191197_1_);
+-      return new NonNullList<E>(Arrays.asList(aobject), p_191197_1_);
++      return new NonNullList<E>(Arrays.asList((E[])aobject), p_191197_1_);
+    }
+ 
+    public static <E> NonNullList<E> func_193580_a(E p_193580_0_, E... p_193580_1_) {
+@@ -28,7 +28,7 @@
+    }
+ 
+    protected NonNullList() {
+-      this(new ArrayList(), (Object)null);
++      this(new ArrayList(), null);
+    }
+ 
+    protected NonNullList(List<E> p_i47327_1_, @Nullable E p_i47327_2_) {

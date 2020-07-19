@@ -1,0 +1,15 @@
+diff -r -U 3 minecraft\net\minecraft\client\settings\KeyBinding.java minecraft_patched\net\minecraft\client\settings\KeyBinding.java
+--- minecraft\net\minecraft\client\settings\KeyBinding.java
++++ minecraft_patched\net\minecraft\client\settings\KeyBinding.java
+@@ -130,9 +130,9 @@
+    public static Supplier<String> func_193626_b(String p_193626_0_) {
+       KeyBinding keybinding = field_74516_a.get(p_193626_0_);
+       return keybinding == null ? () -> {
+-         return p_193624_0_;
++         return p_193626_0_;
+       } : () -> {
+-         return GameSettings.func_74298_c(p_193625_0_.func_151463_i());
++         return GameSettings.func_74298_c(keybinding.func_151463_i());
+       };
+    }
+ 

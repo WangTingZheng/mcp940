@@ -1,0 +1,25 @@
+diff -r -U 3 minecraft\net\minecraft\client\gui\recipebook\GuiRecipeBook.java minecraft_patched\net\minecraft\client\gui\recipebook\GuiRecipeBook.java
+--- minecraft\net\minecraft\client\gui\recipebook\GuiRecipeBook.java
++++ minecraft_patched\net\minecraft\client\gui\recipebook\GuiRecipeBook.java
+@@ -164,7 +164,7 @@
+       if (!s.isEmpty()) {
+          ObjectSet<RecipeList> objectset = new ObjectLinkedOpenHashSet<RecipeList>(this.field_191888_F.func_193987_a(SearchTreeManager.field_194012_b).func_194038_a(s.toLowerCase(Locale.ROOT)));
+          list1.removeIf((p_193947_1_) -> {
+-            return !p_193947_0_.contains(p_193947_1_);
++            return !objectset.contains(p_193947_1_);
+          });
+       }
+ 
+@@ -465,9 +465,9 @@
+ 
+          if (this.field_193965_u.func_194118_a(p_193950_1_, intlist, j1)) {
+             List<CPacketRecipePlacement.ItemMove> list2 = this.func_193954_a(p_193950_4_);
+-            lvt_10_1_ = Lists.<CPacketRecipePlacement.ItemMove>newArrayList();
+-            this.func_193013_a(p_193950_1_, p_193950_2_, j1, intlist, lvt_10_1_);
+-            this.field_191888_F.field_71442_b.func_192831_a(p_193950_3_, list2, lvt_10_1_, this.field_191888_F.field_71439_g);
++            List<CPacketRecipePlacement.ItemMove> list3 = Lists.<CPacketRecipePlacement.ItemMove>newArrayList();
++            this.func_193013_a(p_193950_1_, p_193950_2_, j1, intlist, list3);
++            this.field_191888_F.field_71442_b.func_192831_a(p_193950_3_, list2, list3, this.field_191888_F.field_71439_g);
+             this.field_191888_F.field_71439_g.field_71071_by.func_70296_d();
+          }
+       }

@@ -1,0 +1,11 @@
+diff -r -U 3 minecraft_server\net\minecraft\block\BlockHugeMushroom.java minecraft_server_patched\net\minecraft\block\BlockHugeMushroom.java
+--- minecraft_server\net\minecraft\block\BlockHugeMushroom.java
++++ minecraft_server_patched\net\minecraft\block\BlockHugeMushroom.java
+@@ -141,6 +141,7 @@
+       }
+    }
+ 
++   @SuppressWarnings("incomplete-switch")
+    public IBlockState func_185471_a(IBlockState p_185471_1_, Mirror p_185471_2_) {
+       BlockHugeMushroom.EnumType blockhugemushroom$enumtype = (BlockHugeMushroom.EnumType)p_185471_1_.func_177229_b(field_176380_a);
+       switch(p_185471_2_) {

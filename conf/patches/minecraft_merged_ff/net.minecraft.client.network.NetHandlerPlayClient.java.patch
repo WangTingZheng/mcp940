@@ -1,0 +1,37 @@
+diff -r -U 3 minecraft\net\minecraft\client\network\NetHandlerPlayClient.java minecraft_patched\net\minecraft\client\network\NetHandlerPlayClient.java
+--- minecraft\net\minecraft\client\network\NetHandlerPlayClient.java
++++ minecraft_patched\net\minecraft\client\network\NetHandlerPlayClient.java
+@@ -1162,14 +1162,14 @@
+          break;
+       case ADD:
+          p_191980_1_.func_192595_a().forEach((p_194025_2_) -> {
+-            p_194025_1_.func_194073_a(p_194025_2_);
+-            p_194025_1_.func_193825_e(p_194025_2_);
++            recipebook.func_194073_a(p_194025_2_);
++            recipebook.func_193825_e(p_194025_2_);
+             RecipeToast.func_193665_a(this.field_147299_f.func_193033_an(), p_194025_2_);
+          });
+       }
+ 
+       RecipeBookClient.field_194087_f.forEach((p_194023_1_) -> {
+-         p_194023_1_.func_194214_a(p_194023_0_);
++         p_194023_1_.func_194214_a(recipebook);
+       });
+       if (this.field_147299_f.field_71462_r instanceof IRecipeShownListener) {
+          ((IRecipeShownListener)this.field_147299_f.field_71462_r).func_192043_J_();
+@@ -1221,6 +1221,7 @@
+       p_175093_1_.func_179788_a(this.field_147300_g.func_175723_af());
+    }
+ 
++   @SuppressWarnings("incomplete-switch")
+    public void func_175099_a(SPacketTitle p_175099_1_) {
+       PacketThreadUtil.func_180031_a(p_175099_1_, this, this.field_147299_f);
+       SPacketTitle.Type spackettitle$type = p_175099_1_.func_179807_a();
+@@ -1260,6 +1261,7 @@
+ 
+    }
+ 
++   @SuppressWarnings("incomplete-switch")
+    public void func_147256_a(SPacketPlayerListItem p_147256_1_) {
+       PacketThreadUtil.func_180031_a(p_147256_1_, this, this.field_147299_f);
+ 

@@ -1,0 +1,12 @@
+diff -r -U 3 minecraft_server\net\minecraft\advancements\PlayerAdvancements.java minecraft_server_patched\net\minecraft\advancements\PlayerAdvancements.java
+--- minecraft_server\net\minecraft\advancements\PlayerAdvancements.java
++++ minecraft_server_patched\net\minecraft\advancements\PlayerAdvancements.java
+@@ -119,7 +119,7 @@
+ 
+             Stream<Entry<ResourceLocation, AdvancementProgress>> stream = map.entrySet().stream().sorted(Comparator.comparing(Entry::getValue));
+ 
+-            for(Entry<ResourceLocation, AdvancementProgress> entry : (List)stream.collect(Collectors.toList())) {
++            for(Entry<ResourceLocation, AdvancementProgress> entry : stream.collect(Collectors.toList())) {
+                Advancement advancement = this.field_192756_d.func_191949_aK().func_192778_a(entry.getKey());
+                if (advancement == null) {
+                   field_192753_a.warn("Ignored advancement '" + entry.getKey() + "' in progress file " + this.field_192757_e + " - it doesn't exist anymore?");

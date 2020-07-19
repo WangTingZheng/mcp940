@@ -1,0 +1,25 @@
+diff -r -U 3 minecraft\net\minecraft\world\World.java minecraft_patched\net\minecraft\world\World.java
+--- minecraft\net\minecraft\world\World.java
++++ minecraft_patched\net\minecraft\world\World.java
+@@ -2145,8 +2145,8 @@
+       List<T> list = Lists.<T>newArrayList();
+ 
+       for(Entity entity : this.field_72996_f) {
+-         if (p_175644_1_.isAssignableFrom(entity.getClass()) && p_175644_2_.apply(entity)) {
+-            list.add(entity);
++         if (p_175644_1_.isAssignableFrom(entity.getClass()) && p_175644_2_.apply((T)entity)) {
++            list.add((T)entity);
+          }
+       }
+ 
+@@ -2157,8 +2157,8 @@
+       List<T> list = Lists.<T>newArrayList();
+ 
+       for(Entity entity : this.field_73010_i) {
+-         if (p_175661_1_.isAssignableFrom(entity.getClass()) && p_175661_2_.apply(entity)) {
+-            list.add(entity);
++         if (p_175661_1_.isAssignableFrom(entity.getClass()) && p_175661_2_.apply((T)entity)) {
++            list.add((T)entity);
+          }
+       }
+ 

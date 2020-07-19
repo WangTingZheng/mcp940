@@ -1,0 +1,18 @@
+***************
+*** 239,245 ****
+        GlStateManager.func_187401_a(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+        GlStateManager.func_179092_a(516, 0.003921569F);
+  
+-       for(final int i = 0; i < 3; ++i) {
+           for(int j = 0; j < 2; ++j) {
+              if (!this.field_78876_b[i][j].isEmpty()) {
+                 switch(j) {
+--- 239,246 ----
+        GlStateManager.func_187401_a(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+        GlStateManager.func_179092_a(516, 0.003921569F);
+  
++       for(int i_nf = 0; i_nf < 3; ++i_nf) {
++          final int i = i_nf;
+           for(int j = 0; j < 2; ++j) {
+              if (!this.field_78876_b[i][j].isEmpty()) {
+                 switch(j) {

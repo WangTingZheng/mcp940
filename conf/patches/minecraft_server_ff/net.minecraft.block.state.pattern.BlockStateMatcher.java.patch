@@ -1,0 +1,21 @@
+diff -r -U 3 minecraft_server\net\minecraft\block\state\pattern\BlockStateMatcher.java minecraft_server_patched\net\minecraft\block\state\pattern\BlockStateMatcher.java
+--- minecraft_server\net\minecraft\block\state\pattern\BlockStateMatcher.java
++++ minecraft_server_patched\net\minecraft\block\state\pattern\BlockStateMatcher.java
+@@ -33,7 +33,7 @@
+             return true;
+          } else {
+             for(Entry<IProperty<?>, Predicate<?>> entry : this.field_177640_b.entrySet()) {
+-               if (!this.func_185927_a(p_apply_1_, entry.getKey(), entry.getValue())) {
++               if (!this.func_185927_a(p_apply_1_, (IProperty)entry.getKey(), (Predicate)entry.getValue())) {
+                   return false;
+                }
+             }
+@@ -45,7 +45,7 @@
+       }
+    }
+ 
+-   protected <T extends Comparable<T>> boolean func_185927_a(IBlockState p_185927_1_, IProperty<T> p_185927_2_, Predicate<?> p_185927_3_) {
++   protected <T extends Comparable<T>> boolean func_185927_a(IBlockState p_185927_1_, IProperty<T> p_185927_2_, Predicate<T> p_185927_3_) {
+       return p_185927_3_.apply(p_185927_1_.func_177229_b(p_185927_2_));
+    }
+ 

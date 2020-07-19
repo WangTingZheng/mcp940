@@ -1,0 +1,11 @@
+diff -r -U 3 minecraft\net\minecraft\entity\EntityHanging.java minecraft_patched\net\minecraft\entity\EntityHanging.java
+--- minecraft\net\minecraft\entity\EntityHanging.java
++++ minecraft_patched\net\minecraft\entity\EntityHanging.java
+@@ -213,6 +213,7 @@
+       return this.field_174861_a;
+    }
+ 
++   @SuppressWarnings("incomplete-switch")
+    public float func_184229_a(Rotation p_184229_1_) {
+       if (this.field_174860_b != null && this.field_174860_b.func_176740_k() != EnumFacing.Axis.Y) {
+          switch(p_184229_1_) {

@@ -1,0 +1,12 @@
+diff -r -U 3 minecraft_server\net\minecraft\entity\monster\EntityEnderman.java minecraft_server_patched\net\minecraft\entity\monster\EntityEnderman.java
+--- minecraft_server\net\minecraft\entity\monster\EntityEnderman.java
++++ minecraft_server_patched\net\minecraft\entity\monster\EntityEnderman.java
+@@ -359,7 +359,7 @@
+       public void func_75246_d() {
+          if (this.field_179448_g != null) {
+             if (--this.field_179450_h <= 0) {
+-               this.field_75309_a = (T)this.field_179448_g;
++               this.field_75309_a = this.field_179448_g;
+                this.field_179448_g = null;
+                super.func_75249_e();
+             }

@@ -1,0 +1,12 @@
+diff -r -U 3 minecraft\net\minecraft\client\renderer\entity\RenderLivingBase.java minecraft_patched\net\minecraft\client\renderer\entity\RenderLivingBase.java
+--- minecraft\net\minecraft\client\renderer\entity\RenderLivingBase.java
++++ minecraft_patched\net\minecraft\client\renderer\entity\RenderLivingBase.java
+@@ -35,7 +35,7 @@
+    }
+ 
+    protected <V extends EntityLivingBase, U extends LayerRenderer<V>> boolean func_177094_a(U p_177094_1_) {
+-      return this.field_177097_h.add(p_177094_1_);
++      return this.field_177097_h.add((LayerRenderer<T>)p_177094_1_);
+    }
+ 
+    public ModelBase func_177087_b() {

@@ -1,0 +1,12 @@
+diff -r -U 3 minecraft\net\minecraft\client\renderer\texture\TextureAtlasSprite.java minecraft_patched\net\minecraft\client\renderer\texture\TextureAtlasSprite.java
+--- minecraft\net\minecraft\client\renderer\texture\TextureAtlasSprite.java
++++ minecraft_patched\net\minecraft\client\renderer\texture\TextureAtlasSprite.java
+@@ -281,7 +281,7 @@
+    private void func_130099_d(int p_130099_1_) {
+       if (this.field_110976_a.size() <= p_130099_1_) {
+          for(int i = this.field_110976_a.size(); i <= p_130099_1_; ++i) {
+-            this.field_110976_a.add((Object)null);
++            this.field_110976_a.add(null);
+          }
+ 
+       }

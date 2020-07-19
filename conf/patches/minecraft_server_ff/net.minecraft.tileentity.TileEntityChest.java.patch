@@ -1,0 +1,11 @@
+diff -r -U 3 minecraft_server\net\minecraft\tileentity\TileEntityChest.java minecraft_server_patched\net\minecraft\tileentity\TileEntityChest.java
+--- minecraft_server\net\minecraft\tileentity\TileEntityChest.java
++++ minecraft_server_patched\net\minecraft\tileentity\TileEntityChest.java
+@@ -100,6 +100,7 @@
+       this.field_145984_a = false;
+    }
+ 
++   @SuppressWarnings("incomplete-switch")
+    private void func_174910_a(TileEntityChest p_174910_1_, EnumFacing p_174910_2_) {
+       if (p_174910_1_.func_145837_r()) {
+          this.field_145984_a = false;

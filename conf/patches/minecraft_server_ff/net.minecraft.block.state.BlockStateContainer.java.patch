@@ -1,0 +1,21 @@
+diff -r -U 3 minecraft_server\net\minecraft\block\state\BlockStateContainer.java minecraft_server_patched\net\minecraft\block\state\BlockStateContainer.java
+--- minecraft_server\net\minecraft\block\state\BlockStateContainer.java
++++ minecraft_server_patched\net\minecraft\block\state\BlockStateContainer.java
+@@ -76,7 +76,7 @@
+          blockstatecontainer$stateimplementation1.func_177235_a(map2);
+       }
+ 
+-      this.field_177625_e = ImmutableList.copyOf(list1);
++      this.field_177625_e = ImmutableList.<IBlockState>copyOf(list1);
+    }
+ 
+    public static <T extends Comparable<T>> String func_185919_a(Block p_185919_0_, IProperty<T> p_185919_1_) {
+@@ -106,7 +106,7 @@
+ 
+       while(unmodifiableiterator.hasNext()) {
+          IProperty<?> iproperty = (IProperty)unmodifiableiterator.next();
+-         list.add(iproperty.func_177700_c());
++         list.add(((IProperty)iproperty).func_177700_c());
+       }
+ 
+       return list;

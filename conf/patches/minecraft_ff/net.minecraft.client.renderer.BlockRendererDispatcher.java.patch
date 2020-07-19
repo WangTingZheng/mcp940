@@ -1,0 +1,11 @@
+diff -r -U 3 minecraft\net\minecraft\client\renderer\BlockRendererDispatcher.java minecraft_patched\net\minecraft\client\renderer\BlockRendererDispatcher.java
+--- minecraft\net\minecraft\client\renderer\BlockRendererDispatcher.java
++++ minecraft_patched\net\minecraft\client\renderer\BlockRendererDispatcher.java
+@@ -81,6 +81,7 @@
+       return this.field_175028_a.func_178125_b(p_184389_1_);
+    }
+ 
++   @SuppressWarnings("incomplete-switch")
+    public void func_175016_a(IBlockState p_175016_1_, float p_175016_2_) {
+       EnumBlockRenderType enumblockrendertype = p_175016_1_.func_185901_i();
+       if (enumblockrendertype != EnumBlockRenderType.INVISIBLE) {

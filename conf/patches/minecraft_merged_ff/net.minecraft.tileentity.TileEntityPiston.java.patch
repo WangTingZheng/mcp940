@@ -1,0 +1,21 @@
+diff -r -U 3 minecraft\net\minecraft\tileentity\TileEntityPiston.java minecraft_patched\net\minecraft\tileentity\TileEntityPiston.java
+--- minecraft\net\minecraft\tileentity\TileEntityPiston.java
++++ minecraft_patched\net\minecraft\tileentity\TileEntityPiston.java
+@@ -155,7 +155,7 @@
+                      d1 = Math.min(d1, d0) + 0.01D;
+                      field_190613_i.set(enumfacing);
+                      entity.func_70091_d(MoverType.PISTON, d1 * (double)enumfacing.func_82601_c(), d1 * (double)enumfacing.func_96559_d(), d1 * (double)enumfacing.func_82599_e());
+-                     field_190613_i.set((Object)null);
++                     field_190613_i.set(null);
+                      if (!this.field_145875_k && this.field_145872_l) {
+                         this.func_190605_a(entity, enumfacing, d0);
+                      }
+@@ -236,7 +236,7 @@
+             d0 = Math.min(d0, p_190605_3_) + 0.01D;
+             field_190613_i.set(p_190605_2_);
+             p_190605_1_.func_70091_d(MoverType.PISTON, d0 * (double)enumfacing.func_82601_c(), d0 * (double)enumfacing.func_96559_d(), d0 * (double)enumfacing.func_82599_e());
+-            field_190613_i.set((Object)null);
++            field_190613_i.set(null);
+          }
+       }
+ 

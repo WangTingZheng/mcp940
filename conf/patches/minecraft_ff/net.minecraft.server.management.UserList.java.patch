@@ -1,0 +1,12 @@
+diff -r -U 3 minecraft\net\minecraft\server\management\UserList.java minecraft_patched\net\minecraft\server\management\UserList.java
+--- minecraft\net\minecraft\server\management\UserList.java
++++ minecraft_patched\net\minecraft\server\management\UserList.java
+@@ -116,7 +116,7 @@
+    }
+ 
+    protected UserListEntry<K> func_152682_a(JsonObject p_152682_1_) {
+-      return new UserListEntry<K>((Object)null, p_152682_1_);
++      return new UserListEntry<K>(null, p_152682_1_);
+    }
+ 
+    protected Map<String, V> func_152688_e() {

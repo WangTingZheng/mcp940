@@ -1,0 +1,12 @@
+diff -r -U 3 minecraft_server\net\minecraft\world\gen\structure\StructureMineshaftPieces.java minecraft_server_patched\net\minecraft\world\gen\structure\StructureMineshaftPieces.java
+--- minecraft_server\net\minecraft\world\gen\structure\StructureMineshaftPieces.java
++++ minecraft_server_patched\net\minecraft\world\gen\structure\StructureMineshaftPieces.java
+@@ -547,7 +547,7 @@
+          }
+ 
+          int k;
+-         for(lvt_5_1_ = 0; k < this.field_74887_e.func_78883_b(); k = k + 4) {
++         for(k = 0; k < this.field_74887_e.func_78883_b(); k = k + 4) {
+             k = k + p_74861_3_.nextInt(this.field_74887_e.func_78883_b());
+             if (k + 3 > this.field_74887_e.func_78883_b()) {
+                break;

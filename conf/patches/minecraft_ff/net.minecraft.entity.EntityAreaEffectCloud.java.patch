@@ -1,0 +1,33 @@
+diff -r -U 3 minecraft\net\minecraft\entity\EntityAreaEffectCloud.java minecraft_patched\net\minecraft\entity\EntityAreaEffectCloud.java
+--- minecraft\net\minecraft\entity\EntityAreaEffectCloud.java
++++ minecraft_patched\net\minecraft\entity\EntityAreaEffectCloud.java
+@@ -248,14 +248,14 @@
+                }
+             }
+ 
+-            iterator = Lists.<Entry<Entity, Integer>>newArrayList();
++            List<PotionEffect> lstPotions = Lists.newArrayList();
+ 
+             for(PotionEffect potioneffect1 : this.field_184502_e.func_185170_a()) {
+-               iterator.add(new PotionEffect(potioneffect1.func_188419_a(), potioneffect1.func_76459_b() / 4, potioneffect1.func_76458_c(), potioneffect1.func_82720_e(), potioneffect1.func_188418_e()));
+-            }
+-
+-            iterator.addAll(this.field_184503_f);
+-            if (iterator.isEmpty()) {
++                lstPotions.add(new PotionEffect(potioneffect1.func_188419_a(), potioneffect1.func_76459_b() / 4, potioneffect1.func_76458_c(), potioneffect1.func_82720_e(), potioneffect1.func_188418_e()));
++            }
++
++            lstPotions.addAll(this.field_184503_f);
++            if (lstPotions.isEmpty()) {
+                this.field_184504_g.clear();
+             } else {
+                List<EntityLivingBase> list = this.field_70170_p.<EntityLivingBase>func_72872_a(EntityLivingBase.class, this.func_174813_aQ());
+@@ -268,7 +268,7 @@
+                         if (d2 <= (double)(f * f)) {
+                            this.field_184504_g.put(entitylivingbase, Integer.valueOf(this.field_70173_aa + this.field_184507_at));
+ 
+-                           for(PotionEffect potioneffect : iterator) {
++                           for(PotionEffect potioneffect : lstPotions) {
+                               if (potioneffect.func_188419_a().func_76403_b()) {
+                                  potioneffect.func_188419_a().func_180793_a(this, this.func_184494_w(), entitylivingbase, potioneffect.func_76458_c(), 0.5D);
+                               } else {

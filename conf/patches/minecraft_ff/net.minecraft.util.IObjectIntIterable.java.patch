@@ -1,0 +1,9 @@
+diff -r -U 3 minecraft\net\minecraft\util\IObjectIntIterable.java minecraft_patched\net\minecraft\util\IObjectIntIterable.java
+--- minecraft\net\minecraft\util\IObjectIntIterable.java
++++ minecraft_patched\net\minecraft\util\IObjectIntIterable.java
+@@ -1,4 +1,4 @@
+ package net.minecraft.util;
+ 
+-public interface IObjectIntIterable extends Iterable {
++public interface IObjectIntIterable<V> extends Iterable<V> {
+ }

@@ -1,0 +1,12 @@
+diff -r -U 3 minecraft\net\minecraft\util\ObjectIntIdentityMap.java minecraft_patched\net\minecraft\util\ObjectIntIdentityMap.java
+--- minecraft\net\minecraft\util\ObjectIntIdentityMap.java
++++ minecraft_patched\net\minecraft\util\ObjectIntIdentityMap.java
+@@ -25,7 +25,7 @@
+       this.field_148749_a.put(p_148746_1_, Integer.valueOf(p_148746_2_));
+ 
+       while(this.field_148748_b.size() <= p_148746_2_) {
+-         this.field_148748_b.add((Object)null);
++         this.field_148748_b.add(null);
+       }
+ 
+       this.field_148748_b.set(p_148746_2_, p_148746_1_);

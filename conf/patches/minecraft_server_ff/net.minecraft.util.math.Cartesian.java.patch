@@ -1,0 +1,21 @@
+diff -r -U 3 minecraft_server\net\minecraft\util\math\Cartesian.java minecraft_server_patched\net\minecraft\util\math\Cartesian.java
+--- minecraft_server\net\minecraft\util\math\Cartesian.java
++++ minecraft_server_patched\net\minecraft\util\math\Cartesian.java
+@@ -14,7 +14,7 @@
+ 
+ public class Cartesian {
+    public static <T> Iterable<T[]> func_179318_a(Class<T> p_179318_0_, Iterable<? extends Iterable<? extends T>> p_179318_1_) {
+-      return new Cartesian.Product<T[]>(p_179318_0_, (Iterable[])func_179322_b(Iterable.class, p_179318_1_));
++      return new Cartesian.Product(p_179318_0_, (Iterable[])func_179322_b(Iterable.class, p_179318_1_));
+    }
+ 
+    public static <T> Iterable<List<T>> func_179321_a(Iterable<? extends Iterable<? extends T>> p_179321_0_) {
+@@ -44,7 +44,7 @@
+       }
+ 
+       public List<T> apply(@Nullable Object[] p_apply_1_) {
+-         return Arrays.<T>asList(p_apply_1_);
++         return Arrays.<T>asList((T[])p_apply_1_);
+       }
+    }
+ 

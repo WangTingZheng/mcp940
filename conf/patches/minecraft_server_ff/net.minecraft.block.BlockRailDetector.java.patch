@@ -1,0 +1,19 @@
+diff -r -U 3 minecraft_server\net\minecraft\block\BlockRailDetector.java minecraft_server_patched\net\minecraft\block\BlockRailDetector.java
+--- minecraft_server\net\minecraft\block\BlockRailDetector.java
++++ minecraft_server_patched\net\minecraft\block\BlockRailDetector.java
+@@ -170,6 +170,7 @@
+       return i;
+    }
+ 
++   @SuppressWarnings("incomplete-switch")
+    public IBlockState func_185499_a(IBlockState p_185499_1_, Rotation p_185499_2_) {
+       switch(p_185499_2_) {
+       case CLOCKWISE_180:
+@@ -242,6 +243,7 @@
+       }
+    }
+ 
++   @SuppressWarnings("incomplete-switch")
+    public IBlockState func_185471_a(IBlockState p_185471_1_, Mirror p_185471_2_) {
+       BlockRailBase.EnumRailDirection blockrailbase$enumraildirection = (BlockRailBase.EnumRailDirection)p_185471_1_.func_177229_b(field_176573_b);
+       switch(p_185471_2_) {

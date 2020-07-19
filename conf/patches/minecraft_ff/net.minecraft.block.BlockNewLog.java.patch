@@ -1,0 +1,11 @@
+diff -r -U 3 minecraft\net\minecraft\block\BlockNewLog.java minecraft_patched\net\minecraft\block\BlockNewLog.java
+--- minecraft\net\minecraft\block\BlockNewLog.java
++++ minecraft_patched\net\minecraft\block\BlockNewLog.java
+@@ -68,6 +68,7 @@
+       return iblockstate;
+    }
+ 
++   @SuppressWarnings("incomplete-switch")
+    public int func_176201_c(IBlockState p_176201_1_) {
+       int i = 0;
+       i = i | ((BlockPlanks.EnumType)p_176201_1_.func_177229_b(field_176300_b)).func_176839_a() - 4;

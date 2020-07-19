@@ -1,0 +1,28 @@
+diff -r -U 3 minecraft\net\minecraft\client\util\SuffixArray.java minecraft_patched\net\minecraft\client\util\SuffixArray.java
+--- minecraft\net\minecraft\client\util\SuffixArray.java
++++ minecraft_patched\net\minecraft\client\util\SuffixArray.java
+@@ -60,15 +60,15 @@
+       };
+       Swapper swapper = (p_194054_3_, p_194054_4_) -> {
+          if (p_194054_3_ != p_194054_4_) {
+-            int i2 = p_194054_0_[p_194054_3_];
+-            p_194054_0_[p_194054_3_] = p_194054_0_[p_194054_4_];
+-            p_194054_0_[p_194054_4_] = i2;
+-            i2 = p_194054_1_[p_194054_3_];
+-            p_194054_1_[p_194054_3_] = p_194054_1_[p_194054_4_];
+-            p_194054_1_[p_194054_4_] = i2;
+-            i2 = p_194054_2_[p_194054_3_];
+-            p_194054_2_[p_194054_3_] = p_194054_2_[p_194054_4_];
+-            p_194054_2_[p_194054_4_] = i2;
++            int i2 = aint1[p_194054_3_];
++            aint1[p_194054_3_] = aint1[p_194054_4_];
++            aint1[p_194054_4_] = i2;
++            i2 = aint2[p_194054_3_];
++            aint2[p_194054_3_] = aint2[p_194054_4_];
++            aint2[p_194054_4_] = i2;
++            i2 = aint3[p_194054_3_];
++            aint3[p_194054_3_] = aint3[p_194054_4_];
++            aint3[p_194054_4_] = i2;
+          }
+ 
+       };

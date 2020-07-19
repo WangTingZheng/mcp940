@@ -1,0 +1,21 @@
+diff -r -U 3 minecraft\net\minecraft\client\renderer\texture\TextureMap.java minecraft_patched\net\minecraft\client\renderer\texture\TextureMap.java
+--- minecraft\net\minecraft\client\renderer\texture\TextureMap.java
++++ minecraft_patched\net\minecraft\client\renderer\texture\TextureMap.java
+@@ -56,7 +56,7 @@
+       this.field_94249_f.func_110969_c(16);
+       int[][] aint1 = new int[this.field_147636_j + 1][];
+       aint1[0] = aint;
+-      this.field_94249_f.func_110968_a(Lists.newArrayList(aint1));
++      this.field_94249_f.func_110968_a(Lists.<int[][]>newArrayList(aint1));
+    }
+ 
+    public void func_110551_a(IResourceManager p_110551_1_) throws IOException {
+@@ -104,7 +104,7 @@
+ 
+          j = Math.min(j, Math.min(textureatlassprite.func_94211_a(), textureatlassprite.func_94216_b()));
+          int j1 = Math.min(Integer.lowestOneBit(textureatlassprite.func_94211_a()), Integer.lowestOneBit(textureatlassprite.func_94216_b()));
+-         if (lvt_11_4_ < k) {
++         if (j1 < k) {
+             field_147635_d.warn("Texture {} with size {}x{} limits mip level from {} to {}", resourcelocation, Integer.valueOf(textureatlassprite.func_94211_a()), Integer.valueOf(textureatlassprite.func_94216_b()), Integer.valueOf(MathHelper.func_151239_c(k)), Integer.valueOf(MathHelper.func_151239_c(j1)));
+             k = j1;
+          }

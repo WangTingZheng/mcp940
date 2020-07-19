@@ -1,0 +1,12 @@
+diff -r -U 3 minecraft_server\net\minecraft\entity\EntityList.java minecraft_server_patched\net\minecraft\entity\EntityList.java
+--- minecraft_server\net\minecraft\entity\EntityList.java
++++ minecraft_server_patched\net\minecraft\entity\EntityList.java
+@@ -338,7 +338,7 @@
+          field_191309_d.add(resourcelocation);
+ 
+          while(field_191311_g.size() <= p_191303_0_) {
+-            field_191311_g.add((Object)null);
++            field_191311_g.add(null);
+          }
+ 
+          field_191311_g.set(p_191303_0_, p_191303_3_);

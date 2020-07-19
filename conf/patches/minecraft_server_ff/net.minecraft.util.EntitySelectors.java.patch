@@ -1,0 +1,20 @@
+diff -r -U 3 minecraft_server\net\minecraft\util\EntitySelectors.java minecraft_server_patched\net\minecraft\util\EntitySelectors.java
+--- minecraft_server\net\minecraft\util\EntitySelectors.java
++++ minecraft_server_patched\net\minecraft\util\EntitySelectors.java
+@@ -51,7 +51,7 @@
+    public static <T extends Entity> Predicate<T> func_188442_a(final Entity p_188442_0_) {
+       final Team team = p_188442_0_.func_96124_cp();
+       final Team.CollisionRule team$collisionrule = team == null ? Team.CollisionRule.ALWAYS : team.func_186681_k();
+-      return team$collisionrule == Team.CollisionRule.NEVER ? Predicates.alwaysFalse() : Predicates.and(field_180132_d, new Predicate<Entity>() {
++      Predicate<?> ret = team$collisionrule == Team.CollisionRule.NEVER ? Predicates.alwaysFalse() : Predicates.and(field_180132_d, new Predicate<Entity>() {
+          public boolean apply(@Nullable Entity p_apply_1_) {
+             if (!p_apply_1_.func_70104_M()) {
+                return false;
+@@ -73,6 +73,7 @@
+             }
+          }
+       });
++      return (Predicate<T>)ret;
+    }
+ 
+    public static Predicate<Entity> func_191324_b(final Entity p_191324_0_) {

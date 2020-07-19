@@ -1,0 +1,12 @@
+diff -r -U 3 minecraft\net\minecraft\client\renderer\EntityRenderer.java minecraft_patched\net\minecraft\client\renderer\EntityRenderer.java
+--- minecraft\net\minecraft\client\renderer\EntityRenderer.java
++++ minecraft_patched\net\minecraft\client\renderer\EntityRenderer.java
+@@ -315,7 +315,7 @@
+                   flag = true;
+                }
+ 
+-               d0 = d0;
++//               d0 = d0;
+             }
+ 
+             if (this.field_78531_r.field_71476_x != null) {

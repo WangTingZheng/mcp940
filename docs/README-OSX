@@ -1,0 +1,7 @@
+Things required to run:
+
+- python to run most of the tools
+- patch to fix the decompiled sources
+- minecraft.jar, lwjgl jars, and the OSX version of the natives, these can be
+  found in your home folder under "Library/Application Support/minecraft/bin",
+  the entire bin folder itself should be copied into the jars folder

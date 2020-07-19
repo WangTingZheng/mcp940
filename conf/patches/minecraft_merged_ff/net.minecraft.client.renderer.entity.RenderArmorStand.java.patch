@@ -1,0 +1,14 @@
+diff -r -U 3 minecraft\net\minecraft\client\renderer\entity\RenderArmorStand.java minecraft_patched\net\minecraft\client\renderer\entity\RenderArmorStand.java
+--- minecraft\net\minecraft\client\renderer\entity\RenderArmorStand.java
++++ minecraft_patched\net\minecraft\client\renderer\entity\RenderArmorStand.java
+@@ -21,8 +21,8 @@
+       super(p_i46195_1_, new ModelArmorStand(), 0.0F);
+       LayerBipedArmor layerbipedarmor = new LayerBipedArmor(this) {
+          protected void func_177177_a() {
+-            this.field_177189_c = (T)(new ModelArmorStandArmor(0.5F));
+-            this.field_177186_d = (T)(new ModelArmorStandArmor(1.0F));
++            this.field_177189_c = new ModelArmorStandArmor(0.5F);
++            this.field_177186_d = new ModelArmorStandArmor(1.0F);
+          }
+       };
+       this.func_177094_a(layerbipedarmor);

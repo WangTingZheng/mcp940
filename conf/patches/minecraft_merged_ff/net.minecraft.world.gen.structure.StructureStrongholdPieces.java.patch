@@ -1,0 +1,11 @@
+diff -r -U 3 minecraft\net\minecraft\world\gen\structure\StructureStrongholdPieces.java minecraft_patched\net\minecraft\world\gen\structure\StructureStrongholdPieces.java
+--- minecraft\net\minecraft\world\gen\structure\StructureStrongholdPieces.java
++++ minecraft_patched\net\minecraft\world\gen\structure\StructureStrongholdPieces.java
+@@ -26,6 +26,7 @@
+ import net.minecraft.world.gen.structure.template.TemplateManager;
+ import net.minecraft.world.storage.loot.LootTableList;
+ 
++@SuppressWarnings("incomplete-switch")
+ public class StructureStrongholdPieces {
+    private static final StructureStrongholdPieces.PieceWeight[] field_75205_b = new StructureStrongholdPieces.PieceWeight[]{new StructureStrongholdPieces.PieceWeight(StructureStrongholdPieces.Straight.class, 40, 0), new StructureStrongholdPieces.PieceWeight(StructureStrongholdPieces.Prison.class, 5, 5), new StructureStrongholdPieces.PieceWeight(StructureStrongholdPieces.LeftTurn.class, 20, 0), new StructureStrongholdPieces.PieceWeight(StructureStrongholdPieces.RightTurn.class, 20, 0), new StructureStrongholdPieces.PieceWeight(StructureStrongholdPieces.RoomCrossing.class, 10, 6), new StructureStrongholdPieces.PieceWeight(StructureStrongholdPieces.StairsStraight.class, 5, 5), new StructureStrongholdPieces.PieceWeight(StructureStrongholdPieces.Stairs.class, 5, 5), new StructureStrongholdPieces.PieceWeight(StructureStrongholdPieces.Crossing.class, 5, 4), new StructureStrongholdPieces.PieceWeight(StructureStrongholdPieces.ChestCorridor.class, 5, 4), new StructureStrongholdPieces.PieceWeight(StructureStrongholdPieces.Library.class, 10, 2) {
+       public boolean func_75189_a(int p_75189_1_) {

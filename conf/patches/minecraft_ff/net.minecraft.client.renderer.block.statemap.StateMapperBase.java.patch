@@ -1,0 +1,12 @@
+diff -r -U 3 minecraft\net\minecraft\client\renderer\block\statemap\StateMapperBase.java minecraft_patched\net\minecraft\client\renderer\block\statemap\StateMapperBase.java
+--- minecraft\net\minecraft\client\renderer\block\statemap\StateMapperBase.java
++++ minecraft_patched\net\minecraft\client\renderer\block\statemap\StateMapperBase.java
+@@ -34,7 +34,7 @@
+    }
+ 
+    private <T extends Comparable<T>> String func_187489_a(IProperty<T> p_187489_1_, Comparable<?> p_187489_2_) {
+-      return p_187489_1_.func_177702_a(p_187489_2_);
++      return p_187489_1_.func_177702_a((T)p_187489_2_);
+    }
+ 
+    public Map<IBlockState, ModelResourceLocation> func_178130_a(Block p_178130_1_) {

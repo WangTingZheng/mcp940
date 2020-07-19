@@ -1,0 +1,12 @@
+diff -r -U 3 minecraft_server\net\minecraft\world\storage\loot\functions\LootFunctionManager.java minecraft_server_patched\net\minecraft\world\storage\loot\functions\LootFunctionManager.java
+--- minecraft_server\net\minecraft\world\storage\loot\functions\LootFunctionManager.java
++++ minecraft_server_patched\net\minecraft\world\storage\loot\functions\LootFunctionManager.java
+@@ -21,7 +21,7 @@
+ 
+    public static <T extends LootFunction> void func_186582_a(LootFunction.Serializer<? extends T> p_186582_0_) {
+       ResourceLocation resourcelocation = p_186582_0_.func_186529_a();
+-      Class<T> oclass = p_186582_0_.func_186531_b();
++      Class<T> oclass = (Class<T>)p_186582_0_.func_186531_b();
+       if (field_186584_a.containsKey(resourcelocation)) {
+          throw new IllegalArgumentException("Can't re-register item function name " + resourcelocation);
+       } else if (field_186585_b.containsKey(oclass)) {

@@ -1,0 +1,14 @@
+diff -r -U 3 minecraft\net\minecraft\client\renderer\entity\RenderPigZombie.java minecraft_patched\net\minecraft\client\renderer\entity\RenderPigZombie.java
+--- minecraft\net\minecraft\client\renderer\entity\RenderPigZombie.java
++++ minecraft_patched\net\minecraft\client\renderer\entity\RenderPigZombie.java
+@@ -12,8 +12,8 @@
+       super(p_i46148_1_, new ModelZombie(), 0.5F);
+       this.func_177094_a(new LayerBipedArmor(this) {
+          protected void func_177177_a() {
+-            this.field_177189_c = (T)(new ModelZombie(0.5F, true));
+-            this.field_177186_d = (T)(new ModelZombie(1.0F, true));
++            this.field_177189_c = new ModelZombie(0.5F, true);
++            this.field_177186_d = new ModelZombie(1.0F, true);
+          }
+       });
+    }

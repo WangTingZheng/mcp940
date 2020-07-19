@@ -1,0 +1,12 @@
+diff -r -U 3 minecraft\net\minecraft\client\renderer\block\model\Variant.java minecraft_patched\net\minecraft\client\renderer\block\model\Variant.java
+--- minecraft\net\minecraft\client\renderer\block\model\Variant.java
++++ minecraft_patched\net\minecraft\client\renderer\block\model\Variant.java
+@@ -56,7 +56,7 @@
+    public int hashCode() {
+       int i = this.field_188050_a.hashCode();
+       i = 31 * i + this.field_188051_b.hashCode();
+-      i = 31 * i + this.field_188052_c.hashCode();
++      i = 31 * i + Boolean.valueOf(this.field_188052_c).hashCode();
+       i = 31 * i + this.field_188053_d;
+       return i;
+    }

@@ -1,0 +1,12 @@
+diff -r -U 3 minecraft\net\minecraft\advancements\AdvancementList.java minecraft_patched\net\minecraft\advancements\AdvancementList.java
+--- minecraft\net\minecraft\advancements\AdvancementList.java
++++ minecraft_patched\net\minecraft\advancements\AdvancementList.java
+@@ -54,7 +54,7 @@
+    }
+ 
+    public void func_192083_a(Map<ResourceLocation, Advancement.Builder> p_192083_1_) {
+-      Function<ResourceLocation, Advancement> function = Functions.<ResourceLocation, Advancement>forMap(this.field_192092_b, (Object)null);
++      Function<ResourceLocation, Advancement> function = Functions.<ResourceLocation, Advancement>forMap(this.field_192092_b, null);
+ 
+       label42:
+       while(!p_192083_1_.isEmpty()) {

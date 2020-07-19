@@ -1,0 +1,24 @@
+diff -r -U 3 minecraft\net\minecraft\client\renderer\entity\RenderManager.java minecraft_patched\net\minecraft\client\renderer\entity\RenderManager.java
+--- minecraft\net\minecraft\client\renderer\entity\RenderManager.java
++++ minecraft_patched\net\minecraft\client\renderer\entity\RenderManager.java
+@@ -231,9 +231,9 @@
+    }
+ 
+    public <T extends Entity> Render<T> func_78715_a(Class<? extends Entity> p_78715_1_) {
+-      Render<? extends Entity> render = (Render)this.field_78729_o.get(p_78715_1_);
++      Render<T> render = (Render)this.field_78729_o.get(p_78715_1_);
+       if (render == null && p_78715_1_ != Entity.class) {
+-         render = this.<Entity>func_78715_a(p_78715_1_.getSuperclass());
++         render = this.func_78715_a((Class<? extends Entity>)p_78715_1_.getSuperclass());
+          this.field_78729_o.put(p_78715_1_, render);
+       }
+ 
+@@ -245,7 +245,7 @@
+       if (p_78713_1_ instanceof AbstractClientPlayer) {
+          String s = ((AbstractClientPlayer)p_78713_1_).func_175154_l();
+          RenderPlayer renderplayer = this.field_178636_l.get(s);
+-         return renderplayer != null ? renderplayer : this.field_178637_m;
++         return (Render<T>)(renderplayer != null ? renderplayer : this.field_178637_m);
+       } else {
+          return this.<T>func_78715_a(p_78713_1_.getClass());
+       }

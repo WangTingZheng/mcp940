@@ -1,0 +1,19 @@
+diff -r -U 3 minecraft\net\minecraft\client\gui\GuiSnooper.java minecraft_patched\net\minecraft\client\gui\GuiSnooper.java
+--- minecraft\net\minecraft\client\gui\GuiSnooper.java
++++ minecraft_patched\net\minecraft\client\gui\GuiSnooper.java
+@@ -38,13 +38,13 @@
+       this.field_146292_n.add(new GuiButton(2, this.field_146294_l / 2 + 2, this.field_146295_m - 30, 150, 20, I18n.func_135052_a("gui.done")));
+       boolean flag = this.field_146297_k.func_71401_C() != null && this.field_146297_k.func_71401_C().func_80003_ah() != null;
+ 
+-      for(Entry<String, String> entry : (new TreeMap(this.field_146297_k.func_71378_E().func_76465_c())).entrySet()) {
++      for(Entry<String, String> entry : (new TreeMap<String, String>(this.field_146297_k.func_71378_E().func_76465_c())).entrySet()) {
+          this.field_146604_g.add((flag ? "C " : "") + (String)entry.getKey());
+          this.field_146609_h.add(this.field_146289_q.func_78269_a(entry.getValue(), this.field_146294_l - 220));
+       }
+ 
+       if (flag) {
+-         for(Entry<String, String> entry1 : (new TreeMap(this.field_146297_k.func_71401_C().func_80003_ah().func_76465_c())).entrySet()) {
++         for(Entry<String, String> entry1 : (new TreeMap<String, String>(this.field_146297_k.func_71401_C().func_80003_ah().func_76465_c())).entrySet()) {
+             this.field_146604_g.add("S " + (String)entry1.getKey());
+             this.field_146609_h.add(this.field_146289_q.func_78269_a(entry1.getValue(), this.field_146294_l - 220));
+          }

@@ -1,0 +1,17 @@
+***************
+*** 76,82 ****
+           blockstatecontainer$stateimplementation1.func_177235_a(map2);
+        }
+  
+-       this.field_177625_e = ImmutableList.copyOf(list1);
+     }
+  
+     public static <T extends Comparable<T>> String func_185919_a(Block p_185919_0_, IProperty<T> p_185919_1_) {
+--- 76,82 ----
+           blockstatecontainer$stateimplementation1.func_177235_a(map2);
+        }
+  
++       this.field_177625_e = ImmutableList.<IBlockState>copyOf(list1);
+     }
+  
+     public static <T extends Comparable<T>> String func_185919_a(Block p_185919_0_, IProperty<T> p_185919_1_) {

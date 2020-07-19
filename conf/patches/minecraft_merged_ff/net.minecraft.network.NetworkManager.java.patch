@@ -1,0 +1,12 @@
+diff -r -U 3 minecraft\net\minecraft\network\NetworkManager.java minecraft_patched\net\minecraft\network\NetworkManager.java
+--- minecraft\net\minecraft\network\NetworkManager.java
++++ minecraft_patched\net\minecraft\network\NetworkManager.java
+@@ -118,7 +118,7 @@
+    protected void channelRead0(ChannelHandlerContext p_channelRead0_1_, Packet<?> p_channelRead0_2_) throws Exception {
+       if (this.field_150746_k.isOpen()) {
+          try {
+-            p_channelRead0_2_.func_148833_a(this.field_150744_m);
++            ((Packet<INetHandler>)p_channelRead0_2_).func_148833_a(this.field_150744_m);
+          } catch (ThreadQuickExitException var4) {
+             ;
+          }

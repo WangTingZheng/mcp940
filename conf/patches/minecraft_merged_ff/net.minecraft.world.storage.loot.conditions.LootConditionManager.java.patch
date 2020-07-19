@@ -1,0 +1,12 @@
+diff -r -U 3 minecraft\net\minecraft\world\storage\loot\conditions\LootConditionManager.java minecraft_patched\net\minecraft\world\storage\loot\conditions\LootConditionManager.java
+--- minecraft\net\minecraft\world\storage\loot\conditions\LootConditionManager.java
++++ minecraft_patched\net\minecraft\world\storage\loot\conditions\LootConditionManager.java
+@@ -23,7 +23,7 @@
+ 
+    public static <T extends LootCondition> void func_186639_a(LootCondition.Serializer<? extends T> p_186639_0_) {
+       ResourceLocation resourcelocation = p_186639_0_.func_186602_a();
+-      Class<T> oclass = p_186639_0_.func_186604_b();
++      Class<T> oclass = (Class<T>)p_186639_0_.func_186604_b();
+       if (field_186642_a.containsKey(resourcelocation)) {
+          throw new IllegalArgumentException("Can't re-register item condition name " + resourcelocation);
+       } else if (field_186643_b.containsKey(oclass)) {

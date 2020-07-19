@@ -1,0 +1,27 @@
+diff -r -U 3 minecraft\net\minecraft\client\renderer\texture\TextureManager.java minecraft_patched\net\minecraft\client\renderer\texture\TextureManager.java
+--- minecraft\net\minecraft\client\renderer\texture\TextureManager.java
++++ minecraft_patched\net\minecraft\client\renderer\texture\TextureManager.java
+@@ -48,7 +48,7 @@
+       }
+    }
+ 
+-   public boolean func_110579_a(ResourceLocation p_110579_1_, final ITextureObject p_110579_2_) {
++   public boolean func_110579_a(ResourceLocation p_110579_1_, ITextureObject p_110579_2_) {
+       boolean flag = true;
+ 
+       try {
+@@ -62,12 +62,13 @@
+          this.field_110585_a.put(p_110579_1_, p_110579_2_);
+          flag = false;
+       } catch (Throwable throwable) {
++        final ITextureObject p_110579_2_f = p_110579_2_;
+          CrashReport crashreport = CrashReport.func_85055_a(throwable, "Registering texture");
+          CrashReportCategory crashreportcategory = crashreport.func_85058_a("Resource location being registered");
+          crashreportcategory.func_71507_a("Resource location", p_110579_1_);
+          crashreportcategory.func_189529_a("Texture object class", new ICrashReportDetail<String>() {
+             public String call() throws Exception {
+-               return p_110579_2_.getClass().getName();
++               return p_110579_2_f.getClass().getName();
+             }
+          });
+          throw new ReportedException(crashreport);

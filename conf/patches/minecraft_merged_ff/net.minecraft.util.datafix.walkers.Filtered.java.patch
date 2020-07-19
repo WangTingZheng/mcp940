@@ -1,0 +1,15 @@
+diff -r -U 3 minecraft\net\minecraft\util\datafix\walkers\Filtered.java minecraft_patched\net\minecraft\util\datafix\walkers\Filtered.java
+--- minecraft\net\minecraft\util\datafix\walkers\Filtered.java
++++ minecraft_patched\net\minecraft\util\datafix\walkers\Filtered.java
+@@ -13,9 +13,9 @@
+ 
+    public Filtered(Class<?> p_i47309_1_) {
+       if (Entity.class.isAssignableFrom(p_i47309_1_)) {
+-         this.field_188272_a = EntityList.func_191306_a(p_i47309_1_);
++         this.field_188272_a = EntityList.func_191306_a((Class<Entity>)p_i47309_1_);
+       } else if (TileEntity.class.isAssignableFrom(p_i47309_1_)) {
+-         this.field_188272_a = TileEntity.func_190559_a(p_i47309_1_);
++         this.field_188272_a = TileEntity.func_190559_a((Class<TileEntity>)p_i47309_1_);
+       } else {
+          this.field_188272_a = null;
+       }

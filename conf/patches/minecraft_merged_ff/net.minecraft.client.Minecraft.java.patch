@@ -1,0 +1,38 @@
+diff -r -U 3 minecraft\net\minecraft\client\Minecraft.java minecraft_patched\net\minecraft\client\Minecraft.java
+--- minecraft\net\minecraft\client\Minecraft.java
++++ minecraft_patched\net\minecraft\client\Minecraft.java
+@@ -379,9 +379,7 @@
+ 
+       while(true) {
+          try {
+-            if (!this.field_71425_J) {
+-               break;
+-            }
++            while (this.field_71425_J) {
+ 
+             if (!this.field_71434_R || this.field_71433_S == null) {
+                try {
+@@ -391,10 +389,12 @@
+                   this.func_147108_a(new GuiMemoryErrorScreen());
+                   System.gc();
+                }
+-               continue;
+-            }
+-
++            }
++            else
++            {
+             this.func_71377_b(this.field_71433_S);
++            }
++            }
+          } catch (MinecraftError var12) {
+             break;
+          } catch (ReportedException reportedexception) {
+@@ -1285,6 +1285,7 @@
+       }
+    }
+ 
++   @SuppressWarnings("incomplete-switch")
+    private void func_147121_ag() {
+       if (!this.field_71442_b.func_181040_m()) {
+          this.field_71467_ac = 4;

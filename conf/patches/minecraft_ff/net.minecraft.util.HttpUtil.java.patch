@@ -1,0 +1,12 @@
+diff -r -U 3 minecraft\net\minecraft\util\HttpUtil.java minecraft_patched\net\minecraft\util\HttpUtil.java
+--- minecraft\net\minecraft\util\HttpUtil.java
++++ minecraft_patched\net\minecraft\util\HttpUtil.java
+@@ -218,7 +218,7 @@
+             }
+          }
+       });
+-      return listenablefuture;
++      return (ListenableFuture<Object>) listenablefuture;
+    }
+ 
+    public static int func_76181_a() throws IOException {

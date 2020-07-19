@@ -1,0 +1,21 @@
+diff -r -U 3 minecraft_server\net\minecraft\world\storage\loot\properties\EntityPropertyManager.java minecraft_server_patched\net\minecraft\world\storage\loot\properties\EntityPropertyManager.java
+--- minecraft_server\net\minecraft\world\storage\loot\properties\EntityPropertyManager.java
++++ minecraft_server_patched\net\minecraft\world\storage\loot\properties\EntityPropertyManager.java
+@@ -10,7 +10,7 @@
+ 
+    public static <T extends EntityProperty> void func_186644_a(EntityProperty.Serializer<? extends T> p_186644_0_) {
+       ResourceLocation resourcelocation = p_186644_0_.func_186649_a();
+-      Class<T> oclass = p_186644_0_.func_186651_b();
++      Class<T> oclass = (Class<T>)p_186644_0_.func_186651_b();
+       if (field_186647_a.containsKey(resourcelocation)) {
+          throw new IllegalArgumentException("Can't re-register entity property name " + resourcelocation);
+       } else if (field_186648_b.containsKey(oclass)) {
+@@ -35,7 +35,7 @@
+       if (serializer == null) {
+          throw new IllegalArgumentException("Unknown loot entity property " + p_186645_0_);
+       } else {
+-         return serializer;
++         return (EntityProperty.Serializer<T>)serializer;
+       }
+    }
+ 

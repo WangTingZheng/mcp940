@@ -1,0 +1,11 @@
+diff -r -U 3 minecraft_server\net\minecraft\item\ItemSlab.java minecraft_server_patched\net\minecraft\item\ItemSlab.java
+--- minecraft_server\net\minecraft\item\ItemSlab.java
++++ minecraft_server_patched\net\minecraft\item\ItemSlab.java
+@@ -88,6 +88,6 @@
+    }
+ 
+    protected <T extends Comparable<T>> IBlockState func_185055_a(IProperty<T> p_185055_1_, Comparable<?> p_185055_2_) {
+-      return this.field_179226_c.func_176223_P().func_177226_a(p_185055_1_, p_185055_2_);
++      return this.field_179226_c.func_176223_P().func_177226_a(p_185055_1_, (T)p_185055_2_);
+    }
+ }

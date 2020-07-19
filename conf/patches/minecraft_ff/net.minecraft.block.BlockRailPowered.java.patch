@@ -1,0 +1,27 @@
+diff -r -U 3 minecraft\net\minecraft\block\BlockRailPowered.java minecraft_patched\net\minecraft\block\BlockRailPowered.java
+--- minecraft\net\minecraft\block\BlockRailPowered.java
++++ minecraft_patched\net\minecraft\block\BlockRailPowered.java
+@@ -25,6 +25,7 @@
+       this.func_180632_j(this.field_176227_L.func_177621_b().func_177226_a(field_176568_b, BlockRailBase.EnumRailDirection.NORTH_SOUTH).func_177226_a(field_176569_M, Boolean.valueOf(false)));
+    }
+ 
++   @SuppressWarnings("incomplete-switch")
+    protected boolean func_176566_a(World p_176566_1_, BlockPos p_176566_2_, IBlockState p_176566_3_, boolean p_176566_4_, int p_176566_5_) {
+       if (p_176566_5_ >= 8) {
+          return false;
+@@ -155,6 +156,7 @@
+       return i;
+    }
+ 
++   @SuppressWarnings("incomplete-switch")
+    public IBlockState func_185499_a(IBlockState p_185499_1_, Rotation p_185499_2_) {
+       switch(p_185499_2_) {
+       case CLOCKWISE_180:
+@@ -227,6 +229,7 @@
+       }
+    }
+ 
++   @SuppressWarnings("incomplete-switch")
+    public IBlockState func_185471_a(IBlockState p_185471_1_, Mirror p_185471_2_) {
+       BlockRailBase.EnumRailDirection blockrailbase$enumraildirection = (BlockRailBase.EnumRailDirection)p_185471_1_.func_177229_b(field_176568_b);
+       switch(p_185471_2_) {
