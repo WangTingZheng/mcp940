@@ -21,11 +21,26 @@ public class BlockStateContainer implements IBlockStatePaletteResizer
         this.setBits(4);
     }
 
+    /**
+     * 完成坐标到下标的转换，这似乎是一个256*16*1的长方体，是一个chunk的1/16，一片
+     * @param x x轴坐标
+     * @param y y轴坐标
+     * @param z z轴坐标
+     * @return 方块的下标
+     */
     private static int getIndex(int x, int y, int z)
     {
         return y << 8 | z << 4 | x;
     }
 
+    /**
+     * 传入本类中的bits参数
+     * 分三类：
+     * 小于等于4的，bits会被设置为4，palette对象会被初始化为BlockStatePaletteLinear的对象
+     * 大于4小于等于8的，bits会不变，palette对象会被初始化为BlockStatePaletteHashMap对象
+     * 大于8的，bits
+     * @param bitsIn 传入的bit
+     */
     private void setBits(int bitsIn)
     {
         if (bitsIn != this.bits)
@@ -82,15 +97,27 @@ public class BlockStateContainer implements IBlockStatePaletteResizer
         this.storage.setAt(index, i);
     }
 
+    /**
+     * 根据坐标来获取方块状态
+     * @param x x轴坐标
+     * @param y y轴坐标
+     * @param z z轴坐标
+     * @return 方块状态
+     */
     public IBlockState get(int x, int y, int z)
     {
         return this.get(getIndex(x, y, z));
     }
 
+    /**
+     * 根据下标获取方块状态
+     * @param index 下标
+     * @return 方块状态对象
+     */
     protected IBlockState get(int index)
     {
-        IBlockState iblockstate = this.palette.getBlockState(this.storage.getAt(index));
-        return iblockstate == null ? AIR_BLOCK_STATE : iblockstate;
+        IBlockState iblockstate = this.palette.getBlockState(this.storage.getAt(index)); //从palette对象中获取，id由storage获取
+        return iblockstate == null ? AIR_BLOCK_STATE : iblockstate;  //除去空指针的状态，用空气方块代替
     }
 
     public void read(PacketBuffer buf)

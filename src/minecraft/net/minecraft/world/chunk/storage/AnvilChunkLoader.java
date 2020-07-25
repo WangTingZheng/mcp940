@@ -377,27 +377,29 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
     /**
      * Reads the data stored in the passed NBTTagCompound and creates a Chunk with that data in the passed World.
      * Returns the created Chunk.
+     * 读取存储在传递的NBTTagCompound中的数据，并在传递的世界中使用该数据创建块。
+     * 返回创建的chunk
      */
     private Chunk readChunkFromNBT(World worldIn, NBTTagCompound compound)
     {
-        int i = compound.getInteger("xPos");
-        int j = compound.getInteger("zPos");
-        Chunk chunk = new Chunk(worldIn, i, j);
-        chunk.setHeightMap(compound.getIntArray("HeightMap"));
-        chunk.setTerrainPopulated(compound.getBoolean("TerrainPopulated"));
-        chunk.setLightPopulated(compound.getBoolean("LightPopulated"));
-        chunk.setInhabitedTime(compound.getLong("InhabitedTime"));
-        NBTTagList nbttaglist = compound.getTagList("Sections", 10);
+        int i = compound.getInteger("xPos"); //获取chunk的x坐标
+        int j = compound.getInteger("zPos"); //获取chunk的z坐标
+        Chunk chunk = new Chunk(worldIn, i, j);  //创建一个空的chunk对象
+        chunk.setHeightMap(compound.getIntArray("HeightMap")); // 从NBT中读取并设置heightMap
+        chunk.setTerrainPopulated(compound.getBoolean("TerrainPopulated")); //从NBT中读取并设置TerrainPopulated（地形填充）
+        chunk.setLightPopulated(compound.getBoolean("LightPopulated"));  //从NBT中读取并设置LightPopulated（光线填充）
+        chunk.setInhabitedTime(compound.getLong("InhabitedTime"));  //从NBT中读取并设置InhabitedTime（有人居住时间）
+        NBTTagList nbttaglist = compound.getTagList("Sections", 10); //获取section
         int k = 16;
-        ExtendedBlockStorage[] aextendedblockstorage = new ExtendedBlockStorage[16];
-        boolean flag = worldIn.provider.hasSkyLight();
+        ExtendedBlockStorage[] aextendedblockstorage = new ExtendedBlockStorage[16];  //创建section空数组
+        boolean flag = worldIn.provider.hasSkyLight();  //获取是否有全局光照
 
-        for (int l = 0; l < nbttaglist.tagCount(); ++l)
+        for (int l = 0; l < nbttaglist.tagCount(); ++l) //遍历section
         {
-            NBTTagCompound nbttagcompound = nbttaglist.getCompoundTagAt(l);
-            int i1 = nbttagcompound.getByte("Y");
-            ExtendedBlockStorage extendedblockstorage = new ExtendedBlockStorage(i1 << 4, flag);
-            byte[] abyte = nbttagcompound.getByteArray("Blocks");
+            NBTTagCompound nbttagcompound = nbttaglist.getCompoundTagAt(l); //获取一个section的内容
+            int i1 = nbttagcompound.getByte("Y");  //获取section的y值（0-15）
+            ExtendedBlockStorage extendedblockstorage = new ExtendedBlockStorage(i1 << 4, flag); //获取section的真正的y值并创建section对象
+            byte[] abyte = nbttagcompound.getByteArray("Blocks"); //获取方块
             NibbleArray nibblearray = new NibbleArray(nbttagcompound.getByteArray("Data"));
             NibbleArray nibblearray1 = nbttagcompound.hasKey("Add", 7) ? new NibbleArray(nbttagcompound.getByteArray("Add")) : null;
             extendedblockstorage.getData().setDataFromNBT(abyte, nibblearray, nibblearray1);
@@ -408,11 +410,11 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
                 extendedblockstorage.setSkyLight(new NibbleArray(nbttagcompound.getByteArray("SkyLight")));
             }
 
-            extendedblockstorage.recalculateRefCounts();
-            aextendedblockstorage[i1] = extendedblockstorage;
+            extendedblockstorage.recalculateRefCounts(); //持续计算非空气方块
+            aextendedblockstorage[i1] = extendedblockstorage; //把section加入到section数组中
         }
 
-        chunk.setStorageArrays(aextendedblockstorage);
+        chunk.setStorageArrays(aextendedblockstorage);  //把section数组加入到chunk中
 
         if (compound.hasKey("Biomes", 7))
         {

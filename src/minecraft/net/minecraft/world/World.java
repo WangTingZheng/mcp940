@@ -799,6 +799,7 @@ public abstract class World implements IBlockAccess
 
     /**
      * Gets the lowest height of the chunk where sunlight directly reaches
+     * 获取阳光直接到达的块的最低高度
      */
     public int getChunksLowestHorizon(int x, int z)
     {

@@ -10,7 +10,7 @@ public class BlockStatePaletteHashMap implements IBlockStatePalette
 {
     private final IntIdentityHashBiMap<IBlockState> statePaletteMap;
     private final IBlockStatePaletteResizer paletteResizer;
-    private final int bits;
+    private final int bits;  //id?
 
     public BlockStatePaletteHashMap(int bitsIn, IBlockStatePaletteResizer paletteResizerIn)
     {

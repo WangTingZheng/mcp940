@@ -363,6 +363,9 @@ public class MathHelper
 
     /**
      * Returns the input value rounded up to the next highest power of two.
+     * 返回输入值四舍五入到二的次高幂，就是得到一个最小的，比value值要大的2的次幂
+     * @param value 输入的值
+     * @return 最小的，比value值要大的2的次幂
      */
     public static int smallestEncompassingPowerOfTwo(int value)
     {
@@ -387,11 +390,13 @@ public class MathHelper
      * Uses a B(2, 5) De Bruijn sequence and a lookup table to efficiently calculate the log-base-two of the given
      * value. Optimized for cases where the input value is a power-of-two. If the input value is not a power-of-two,
      * then subtract 1 from the return value.
+     * 使用一个 B(2,5) De Bruijn 序列 和一个 查阅表格去高效地计算log2(Value)的值，当输入值为2的幂次的时候，这种方法会有优化，如果输入的
+     * 值不是2的幂次，就把返回值减去1
      */
     public static int log2DeBruijn(int value)
     {
-        value = isPowerOfTwo(value) ? value : smallestEncompassingPowerOfTwo(value);
-        return MULTIPLY_DE_BRUIJN_BIT_POSITION[(int)((long)value * 125613361L >> 27) & 31];
+        value = isPowerOfTwo(value) ? value : smallestEncompassingPowerOfTwo(value);//输入的值是2的次方？是，value不变，不是，value是最大的比value小的2的次幂
+        return MULTIPLY_DE_BRUIJN_BIT_POSITION[(int)((long)value * 125613361L >> 27) & 31];//
     }
 
     /**

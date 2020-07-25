@@ -47,35 +47,56 @@ public class Chunk
     /**
      * Used to store block IDs, block MSBs, Sky-light maps, Block-light maps, and metadata. Each entry corresponds to a
      * logical segment of 16x16x16 blocks, stacked vertically.
+     * 通常被用来存储方块id，方块msbs，全局光照maps，局部光照maps，还有一些元数据，每一个入口对应一个16*16*16的方块段，垂直堆叠（也就是（16*16）*16*16）
+     * 就是一个section数组
      */
     private final ExtendedBlockStorage[] storageArrays;
 
     /**
      * Contains a 16x16 mapping on the X/Z plane of the biome ID to which each colum belongs.
+     * 包含在每个柱所属的生物群落ID的X/Z平面上的16x16映射。
      */
     private final byte[] blockBiomeArray;
 
     /**
      * A map, similar to heightMap, that tracks how far down precipitation can fall.
+     * 一个类似于heightMap的map，记录降水下降的程度
      */
     private final int[] precipitationHeightMap;
 
-    /** Which columns need their skylightMaps updated. */
+    /**
+     * Which columns need their skylightMaps updated.
+     * 哪些列需要更新全局光照
+     * */
     private final boolean[] updateSkylightColumns;
 
-    /** Whether or not this Chunk is currently loaded into the World */
+    /**
+     * Whether or not this Chunk is currently loaded into the World
+     * 记录当前这个chunk是否被加载进这个世界
+     * */
     private boolean loaded;
 
-    /** Reference to the World object. */
+    /**
+     * Reference to the World object.
+     * 世界对象的引用
+     * */
     private final World world;
+    /*
+    * 一个256长度的数组，因为一个chunk的底边是256个方块的
+     */
     private final int[] heightMap;
 
-    /** The x coordinate of the chunk. */
+    /**
+     * The x coordinate of the chunk.
+     * 这个chunk的x轴
+     * */
     public final int x;
 
-    /** The z coordinate of the chunk. */
+    /** The z coordinate of the chunk.
+     * 这个chunk的z轴
+     * */
     public final int z;
-    private boolean isGapLightingUpdated;
+    private boolean isGapLightingUpdated; //间隙照明是否更新
     private final Map<BlockPos, TileEntity> tileEntities;
     private final ClassInheritanceMultiMap<Entity>[] entityLists;
 
@@ -86,34 +107,52 @@ public class Chunk
 
     /**
      * Set to true if the chunk has been modified and needs to be updated internally.
+     * 如果块已被修改并需要内部更新，则设置为true。
      */
     private boolean dirty;
 
     /**
      * Whether this Chunk has any Entities and thus requires saving on every tick
+     * 此区块是否有任何实体，因此每次勾选都需要保存
      */
     private boolean hasEntities;
 
-    /** The time according to World.worldTime when this chunk was last saved */
+    /**
+     * The time according to World.worldTime when this chunk was last saved
+     * 根据World.worldTime的上次保存此块的时间
+     * */
     private long lastSaveTime;
 
-    /** Lowest value in the heightmap. */
+    /**
+     * Lowest value in the heightmap.
+     * 在heightmap列表中的最低值
+     * */
     private int heightMapMinimum;
 
-    /** the cumulative number of ticks players have been in this chunk */
+    /**
+     * the cumulative number of ticks players have been in this chunk
+     * 在这个chunk中，ticks 玩家的累计数值
+     * */
     private long inhabitedTime;
 
     /**
      * Contains the current round-robin relight check index, and is implied as the relight check location as well.
+     * 包含当前的循环重新点火检查索引，并暗示为重新点火检查位置。
      */
     private int queuedLightChecks;
     private final ConcurrentLinkedQueue<BlockPos> tileEntityPosQueue;
     public boolean unloadQueued;
 
+    /**
+     * 创建一个空的chunk对象，也就是只是新建，不赋值
+     * @param worldIn 世界对象
+     * @param x chunk的x坐标
+     * @param z chunk的z坐标
+     */
     public Chunk(World worldIn, int x, int z)
     {
-        this.storageArrays = new ExtendedBlockStorage[16];
-        this.blockBiomeArray = new byte[256];
+        this.storageArrays = new ExtendedBlockStorage[16];   //初始化section的list
+        this.blockBiomeArray = new byte[256]; //
         this.precipitationHeightMap = new int[256];
         this.updateSkylightColumns = new boolean[256];
         this.tileEntities = Maps.<BlockPos, TileEntity>newHashMap();
@@ -134,30 +173,38 @@ public class Chunk
         Arrays.fill(this.blockBiomeArray, (byte) - 1);
     }
 
+    /**
+     * 从ChunkPrimer中获取方块状态，把它们填入到所对应的chunk中
+     * @param worldIn chunk所在的世界
+     * @param primer ChunkPrimer变量
+     * @param x chunk的x轴位置
+     * @param z chunk的z轴位置，为什么没有y呢？因为以一个chunk来讲，他们是平面的
+     */
     public Chunk(World worldIn, ChunkPrimer primer, int x, int z)
     {
-        this(worldIn, x, z);
+        this(worldIn, x, z); //调用上一个构造方法，初始化各个变量
         int i = 256;
         boolean flag = worldIn.provider.hasSkyLight();
 
+        //其本质是初始化chunk里所有区块的状态
         for (int j = 0; j < 16; ++j)
         {
             for (int k = 0; k < 16; ++k)
             {
-                for (int l = 0; l < 256; ++l)
+                for (int l = 0; l < 256; ++l) //遍历一个chunk
                 {
-                    IBlockState iblockstate = primer.getBlockState(j, l, k);
+                    IBlockState iblockstate = primer.getBlockState(j, l, k);  //获取一个方块状态
 
-                    if (iblockstate.getMaterial() != Material.AIR)
+                    if (iblockstate.getMaterial() != Material.AIR)  //如果这个方块不是空气
                     {
-                        int i1 = l >> 4;
+                        int i1 = l >> 4; //一个chunk是256/16个section，此处是根据block的位置算出它在哪一个section
 
-                        if (this.storageArrays[i1] == NULL_BLOCK_STORAGE)
+                        if (this.storageArrays[i1] == NULL_BLOCK_STORAGE) //如果这个section为空
                         {
-                            this.storageArrays[i1] = new ExtendedBlockStorage(i1 << 4, flag);
+                            this.storageArrays[i1] = new ExtendedBlockStorage(i1 << 4, flag);  //根据section的id计算出能代表一个section的y的值，先右移再左移相当于取整了
                         }
 
-                        this.storageArrays[i1].set(j, l & 15, k, iblockstate);
+                        this.storageArrays[i1].set(j, l & 15, k, iblockstate); //设置方块状态，&上15是为了获得这一个区块在它所在section的位置
                     }
                 }
             }
@@ -166,12 +213,18 @@ public class Chunk
 
     /**
      * Checks whether the chunk is at the X/Z location specified
+     * 判断这个chunk是否在所给定的坐标点上
      */
     public boolean isAtLocation(int x, int z)
     {
         return x == this.x && z == this.z;
     }
 
+    /**
+     * 从方块坐标获得方块高度，由于方块坐标不一定在0-15之间，所以需要取&来保证
+     * @param pos 方块坐标
+     * @return 高度
+     */
     public int getHeight(BlockPos pos)
     {
         return this.getHeightValue(pos.getX() & 15, pos.getZ() & 15);
@@ -179,12 +232,17 @@ public class Chunk
 
     /**
      * Returns the value in the height map at this x, z coordinate in the chunk
+     * 获取x，z的地形高度
      */
     public int getHeightValue(int x, int z)
     {
-        return this.heightMap[z << 4 | x];
+        return this.heightMap[z << 4 | x]; //把x,z转化为0-255的值，也就是说找到一个方块的坐标，转化为它的序号
     }
 
+    /**
+     * 获得最上面的非空section
+     * @return
+     */
     @Nullable
     private ExtendedBlockStorage getLastExtendedBlockStorage()
     {
@@ -201,6 +259,8 @@ public class Chunk
 
     /**
      * Returns the topmost ExtendedBlockStorage instance for this Chunk that actually contains a block.
+     * 返回此实际包含块的块的最顶层ExtendedBlockStorage实例。
+     * 返回的是能代表它的y坐标
      */
     public int getTopFilledSegment()
     {
@@ -210,6 +270,7 @@ public class Chunk
 
     /**
      * Returns the ExtendedBlockStorage array for this Chunk.
+     * 从chunk返回section列表
      */
     public ExtendedBlockStorage[] getBlockStorageArray()
     {
@@ -218,42 +279,45 @@ public class Chunk
 
     /**
      * Generates the height map for a chunk from scratch
+     * 从头开始生成chunk的高度map
+     * 本质上是赋值降水量高度map和高度map
      */
     protected void generateHeightMap()
     {
-        int i = this.getTopFilledSegment();
-        this.heightMapMinimum = Integer.MAX_VALUE;
+        int i = this.getTopFilledSegment();  //获得顶端非空section
+        this.heightMapMinimum = Integer.MAX_VALUE; //设定heightMap中的最小值的初始值是int类型的最大值
 
         for (int j = 0; j < 16; ++j)
         {
-            for (int k = 0; k < 16; ++k)
+            for (int k = 0; k < 16; ++k)  //遍历底面
             {
-                this.precipitationHeightMap[j + (k << 4)] = -999;
+                this.precipitationHeightMap[j + (k << 4)] = -999; //赋值降水量？？？-999是没有降水的意思吗？毕竟在地下 TODO：j + (k << 4)是怎么来的，-999又是什么意思
 
-                for (int l = i + 16; l > 0; --l)
+                for (int l = i + 16; l > 0; --l) //从顶端非空section的上一个section开始
                 {
-                    IBlockState iblockstate = this.getBlockState(j, l - 1, k);
+                    IBlockState iblockstate = this.getBlockState(j, l - 1, k); //获得方块状态
 
-                    if (iblockstate.getLightOpacity() != 0)
+                    if (iblockstate.getLightOpacity() != 0) //如果方块不透明度不等于0，也就是方块不是透明的，从上往下第一个不透明方块代表最高值
                     {
-                        this.heightMap[k << 4 | j] = l;
+                        this.heightMap[k << 4 | j] = l; //根据输入的平面坐标，转化为序号，把高度传进去，顶端非空section的第一个透明方块，作为高度
 
-                        if (l < this.heightMapMinimum)
+                        if (l < this.heightMapMinimum) //如果高度小于当前最小值，就替换
                         {
-                            this.heightMapMinimum = l;
+                            this.heightMapMinimum = l; //把旧高度最小值替换了
                         }
 
-                        break;
+                        break; //找到了就跳出
                     }
                 }
             }
         }
 
-        this.dirty = true;
+        this.dirty = true;  //设定区块以改变，需要更新
     }
 
     /**
      * Generates the initial skylight map for the chunk upon generation or load.
+     * 生成或加载时生成块的初始全局光照
      */
     public void generateSkylightMap()
     {
@@ -266,9 +330,9 @@ public class Chunk
             {
                 this.precipitationHeightMap[j + (k << 4)] = -999;
 
-                for (int l = i + 16; l > 0; --l)
+                for (int l = i + 16; l > 0; --l)  //从第一个空section开始
                 {
-                    if (this.getBlockLightOpacity(j, l - 1, k) != 0)
+                    if (this.getBlockLightOpacity(j, l - 1, k) != 0) //和generateHeightMap基本一样，只不过这里获得透明度的方法合一起写了
                     {
                         this.heightMap[k << 4 | j] = l;
 
@@ -277,91 +341,94 @@ public class Chunk
                             this.heightMapMinimum = l;
                         }
 
-                        break;
+                        break;  //找到一个不透明方块，就跳出，从上往下
                     }
                 }
 
-                if (this.world.provider.hasSkyLight())
+                if (this.world.provider.hasSkyLight())  //如果有全局光照
                 {
-                    int k1 = 15;
-                    int i1 = i + 16 - 1;
+                    int k1 = 15;  //没有其它方块光线影响下，太阳照射到方块上的亮度
+                    int i1 = i + 16 - 1;  //获取不透明方块的y轴坐标，未被操作过的最上面的方块
 
                     while (true)
                     {
-                        int j1 = this.getBlockLightOpacity(j, i1, k);
+                        int j1 = this.getBlockLightOpacity(j, i1, k);  //获取当前方块的不透明度
 
-                        if (j1 == 0 && k1 != 15)
+                        if (j1 == 0 && k1 != 15)  //如果不透明度等于0，也就是全透明，也就是上面有一个空气，且至少已经经过一次循环了，j1=0，k1=15时候啥都没减，这是啥原因？？
                         {
-                            j1 = 1;
+                            j1 = 1;  //设置遮挡的透明度为1，表示每经过一个空气方块就折损1
                         }
 
-                        k1 -= j1;
+                        k1 -= j1; //当前透明度减去遮挡透明度
 
-                        if (k1 > 0)
+                        if (k1 > 0) //如果这个方块还能被看见的话
                         {
-                            ExtendedBlockStorage extendedblockstorage = this.storageArrays[i1 >> 4];
+                            ExtendedBlockStorage extendedblockstorage = this.storageArrays[i1 >> 4];  //根据y坐标获取section对象,i1>>4表示此区块是在哪个section内的（0-15）
 
-                            if (extendedblockstorage != NULL_BLOCK_STORAGE)
+                            if (extendedblockstorage != NULL_BLOCK_STORAGE) //如果section非空
                             {
-                                extendedblockstorage.setSkyLight(j, i1 & 15, k, k1);
-                                this.world.notifyLightSet(new BlockPos((this.x << 4) + j, i1, (this.z << 4) + k));
+                                extendedblockstorage.setSkyLight(j, i1 & 15, k, k1); //设置这个方块的全局光照为减去阻碍的透明度，i&15是计算该区块在所在section的哪一个位置的（0-15）
+                                this.world.notifyLightSet(new BlockPos((this.x << 4) + j, i1, (this.z << 4) + k)); //提醒更新方块关照
                             }
                         }
 
-                        --i1;
+                        --i1; //进行下一个方块的光照的更新
 
-                        if (i1 <= 0 || k1 <= 0)
+                        if (i1 <= 0 || k1 <= 0)  //如果方块到头了或者光线看不见的话
                         {
-                            break;
+                            break; //就停止
                         }
                     }
                 }
             }
         }
 
-        this.dirty = true;
+        this.dirty = true; //把区块标记为脏，方便下一个tick时候更新
     }
 
     /**
      * Propagates a given sky-visible block's light value downward and upward to neighboring blocks as necessary.
+     * 根据需要，将给定天空可见块的灯光值向下和向上传播到相邻块。
+     * 这篇文章提到了这一点：https://www.zhihu.com/question/24459078/answer/133609241，还指出了一个bug
      */
     private void propagateSkylightOcclusion(int x, int z)
     {
-        this.updateSkylightColumns[x + z * 16] = true;
-        this.isGapLightingUpdated = true;
+        this.updateSkylightColumns[x + z * 16] = true;  //x+z*16是计算(x, z)确定的方块在平面上的位置，这个点代表一列也就是1*255，把它设置为需要更新
+        this.isGapLightingUpdated = true;  //间隙照明是否更新设置为真，TODO:不知道啥意思
     }
 
     private void recheckGaps(boolean onlyOne)
     {
-        this.world.profiler.startSection("recheckGaps");
+        this.world.profiler.startSection("recheckGaps");  //TODO: 不知道啥意思
 
-        if (this.world.isAreaLoaded(new BlockPos(this.x * 16 + 8, 0, this.z * 16 + 8), 16))
+        if (this.world.isAreaLoaded(new BlockPos(this.x * 16 + 8, 0, this.z * 16 + 8), 16)) //以前面这个方块为中心，半径为16的区域内，前面这个方块刚好是这个chunk相邻的chunk
         {
             for (int i = 0; i < 16; ++i)
             {
-                for (int j = 0; j < 16; ++j)
+                for (int j = 0; j < 16; ++j)  //遍历底面方块
                 {
-                    if (this.updateSkylightColumns[i + j * 16])
+                    if (this.updateSkylightColumns[i + j * 16]) //如果底面方块所在列需要全局光照更新
                     {
-                        this.updateSkylightColumns[i + j * 16] = false;
-                        int k = this.getHeightValue(i, j);
-                        int l = this.x * 16 + i;
-                        int i1 = this.z * 16 + j;
-                        int j1 = Integer.MAX_VALUE;
+                        this.updateSkylightColumns[i + j * 16] = false; //取消更新，因为接下来要更新了
+                        int k = this.getHeightValue(i, j); //获得该列的高度
+                        int l = this.x * 16 + i; //获取该列的x坐标
+                        int i1 = this.z * 16 + j; //获取该列的z坐标
+                        int j1 = Integer.MAX_VALUE; //设置获取阳光直接到达的块的最低高度最大值
 
                         for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL)
                         {
+                            //把当前获取阳光直接到达的块的最低高度和已有的获取阳光直接到达的块的最低高度比较，取最小
                             j1 = Math.min(j1, this.world.getChunksLowestHorizon(l + enumfacing.getFrontOffsetX(), i1 + enumfacing.getFrontOffsetZ()));
                         }
 
-                        this.checkSkylightNeighborHeight(l, i1, j1);
+                        this.checkSkylightNeighborHeight(l, i1, j1); //检查天空可见块旁边的块的高度，并根据需要安排照明更新。
 
                         for (EnumFacing enumfacing1 : EnumFacing.Plane.HORIZONTAL)
                         {
                             this.checkSkylightNeighborHeight(l + enumfacing1.getFrontOffsetX(), i1 + enumfacing1.getFrontOffsetZ(), k);
                         }
 
-                        if (onlyOne)
+                        if (onlyOne) //如果只操作一列的话，就停止了
                         {
                             this.world.profiler.endSection();
                             return;
@@ -378,10 +445,11 @@ public class Chunk
 
     /**
      * Checks the height of a block next to a sky-visible block and schedules a lighting update as necessary.
+     * 检查天空可见块旁边的块的高度，并根据需要安排照明更新。
      */
     private void checkSkylightNeighborHeight(int x, int z, int maxValue)
     {
-        int i = this.world.getHeight(new BlockPos(x, 0, z)).getY();
+        int i = this.world.getHeight(new BlockPos(x, 0, z)).getY();  //获取该chunk代表点的真正y
 
         if (i > maxValue)
         {
@@ -1310,18 +1378,19 @@ public class Chunk
     }
 
     /**
-     * Accepts a 256-entry array that contains a 16x16 mapping on the X/Z plane of block positions in this Chunk to
-     * biome IDs.
+     * Accepts a 256-entry array that contains a 16x16 mapping on the X/Z plane of block positions in this Chunk to biome IDs.
+     * 接受一个256项数组，该数组包含该块中块位置X/Z平面上的16x16映射到biome IDs。
+     * 这里是chunk类中唯一一个可以写入blockBiomeArray的方法，构造方法只是初始化了变量
      */
     public void setBiomeArray(byte[] biomeArray)
     {
-        if (this.blockBiomeArray.length != biomeArray.length)
+        if (this.blockBiomeArray.length != biomeArray.length)  //如果传入的数组长度不符合要求，就报错
         {
             LOGGER.warn("Could not set level chunk biomes, array length is {} instead of {}", Integer.valueOf(biomeArray.length), Integer.valueOf(this.blockBiomeArray.length));
         }
         else
         {
-            System.arraycopy(biomeArray, 0, this.blockBiomeArray, 0, this.blockBiomeArray.length);
+            System.arraycopy(biomeArray, 0, this.blockBiomeArray, 0, this.blockBiomeArray.length); //拷贝数组到blockBiomeArray
         }
     }
 

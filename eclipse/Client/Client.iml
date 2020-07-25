@@ -76,8 +76,7 @@
   <component name="NewModuleRootManager">
     <output url="file://$MODULE_DIR$/bin" />
     <exclude-output />
-    <content url="file://$MODULE_DIR$" />
-    <content url="file://$MODULE_DIR$/../../src/minecraft">
+    <content url="file://$MODULE_DIR$/../../src">
       <sourceFolder url="file://$MODULE_DIR$/../../src/minecraft" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />

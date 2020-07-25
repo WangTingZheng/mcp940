@@ -9,7 +9,7 @@ public class BlockStatePaletteRegistry implements IBlockStatePalette
 {
     public int idFor(IBlockState state)
     {
-        int i = Block.BLOCK_STATE_IDS.get(state);
+        int i = Block.BLOCK_STATE_IDS.get(state); //从BLOCK_STATE_IDS这个map里进行查询，查询一个对象的id
         return i == -1 ? 0 : i;
     }
 
@@ -18,7 +18,7 @@ public class BlockStatePaletteRegistry implements IBlockStatePalette
      */
     public IBlockState getBlockState(int indexKey)
     {
-        IBlockState iblockstate = Block.BLOCK_STATE_IDS.getByValue(indexKey);
+        IBlockState iblockstate = Block.BLOCK_STATE_IDS.getByValue(indexKey);  //从BLOCK_STATE_IDS这个map里进行查询，查询一个对象的状态
         return iblockstate == null ? Blocks.AIR.getDefaultState() : iblockstate;
     }
 
