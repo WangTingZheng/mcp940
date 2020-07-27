@@ -55,6 +55,7 @@ public class Chunk
     /**
      * Contains a 16x16 mapping on the X/Z plane of the biome ID to which each colum belongs.
      * 包含在每个柱所属的生物群落ID的X/Z平面上的16x16映射。
+     * 包含每个区块的生物群系ID，XZ平面上的16x16个ID。
      */
     private final byte[] blockBiomeArray;
 
@@ -97,7 +98,13 @@ public class Chunk
      * */
     public final int z;
     private boolean isGapLightingUpdated; //间隙照明是否更新
+    /*
+    * 平铺实体列表，宝箱之类的
+     */
     private final Map<BlockPos, TileEntity> tileEntities;
+    /*
+    * 实体列表，比如一些（mob）怪物
+     */
     private final ClassInheritanceMultiMap<Entity>[] entityLists;
 
     /** Boolean value indicating if the terrain is populated. */
@@ -246,15 +253,15 @@ public class Chunk
     @Nullable
     private ExtendedBlockStorage getLastExtendedBlockStorage()
     {
-        for (int i = this.storageArrays.length - 1; i >= 0; --i)
+        for (int i = this.storageArrays.length - 1; i >= 0; --i)  //从上到下遍历chunk里的section
         {
-            if (this.storageArrays[i] != NULL_BLOCK_STORAGE)
+            if (this.storageArrays[i] != NULL_BLOCK_STORAGE) //如果此section非空
             {
-                return this.storageArrays[i];
+                return this.storageArrays[i]; //就返回该section
             }
         }
 
-        return null;
+        return null; //如果没找到，就返回空
     }
 
     /**
@@ -461,6 +468,13 @@ public class Chunk
         }
     }
 
+    /**
+     *
+     * @param x
+     * @param z
+     * @param startY
+     * @param endY
+     */
     private void updateSkylightNeighborHeight(int x, int z, int startY, int endY)
     {
         if (endY > startY && this.world.isAreaLoaded(new BlockPos(x, 0, z), 16))
@@ -479,91 +493,91 @@ public class Chunk
      */
     private void relightBlock(int x, int y, int z)
     {
-        int i = this.heightMap[z << 4 | x] & 255;
-        int j = i;
+        int i = this.heightMap[z << 4 | x] & 255; //获得(x,z)坐标的最高点
+        int j = i;  //保存当前最高点
 
-        if (y > i)
+        if (y > i) //如果方块的y坐标在最高点上面，说明最高点有误
         {
-            j = y;
+            j = y; //设置新的最高点
         }
 
-        while (j > 0 && this.getBlockLightOpacity(x, j - 1, z) == 0)
+        while (j > 0 && this.getBlockLightOpacity(x, j - 1, z) == 0) // 如果不是全空的列，且下面一格不透明度为0，也就是透明，方块会掉落？
         {
-            --j;
+            --j; //最高点减一
         }
 
-        if (j != i)
+        if (j != i) //当区块的最高值发生改变
         {
-            this.world.markBlocksDirtyVertical(x + this.x * 16, z + this.z * 16, j, i);
+            this.world.markBlocksDirtyVertical(x + this.x * 16, z + this.z * 16, j, i); //
             this.heightMap[z << 4 | x] = j;
             int k = this.x * 16 + x;
             int l = this.z * 16 + z;
 
-            if (this.world.provider.hasSkyLight())
+            if (this.world.provider.hasSkyLight()) //
             {
-                if (j < i)
+                if (j < i) //如果最高值变小了
                 {
-                    for (int j1 = j; j1 < i; ++j1)
+                    for (int j1 = j; j1 < i; ++j1) //遍历当前最高值到之前最高值
                     {
-                        ExtendedBlockStorage extendedblockstorage2 = this.storageArrays[j1 >> 4];
+                        ExtendedBlockStorage extendedblockstorage2 = this.storageArrays[j1 >> 4]; //获取相应的section
 
-                        if (extendedblockstorage2 != NULL_BLOCK_STORAGE)
+                        if (extendedblockstorage2 != NULL_BLOCK_STORAGE) //如果section非空
                         {
-                            extendedblockstorage2.setSkyLight(x, j1 & 15, z, 15);
-                            this.world.notifyLightSet(new BlockPos((this.x << 4) + x, j1, (this.z << 4) + z));
+                            extendedblockstorage2.setSkyLight(x, j1 & 15, z, 15); //光照设置为15，因为这些方块之前是没有亮光的
+                            this.world.notifyLightSet(new BlockPos((this.x << 4) + x, j1, (this.z << 4) + z)); //提醒这个区块更新
                         }
                     }
                 }
-                else
+                else //如果变大了
                 {
-                    for (int i1 = i; i1 < j; ++i1)
+                    for (int i1 = i; i1 < j; ++i1) //也是遍历不同的方块
                     {
-                        ExtendedBlockStorage extendedblockstorage = this.storageArrays[i1 >> 4];
+                        ExtendedBlockStorage extendedblockstorage = this.storageArrays[i1 >> 4]; //取得section
 
                         if (extendedblockstorage != NULL_BLOCK_STORAGE)
                         {
-                            extendedblockstorage.setSkyLight(x, i1 & 15, z, 0);
-                            this.world.notifyLightSet(new BlockPos((this.x << 4) + x, i1, (this.z << 4) + z));
+                            extendedblockstorage.setSkyLight(x, i1 & 15, z, 0); //把区块光照设置为0，因为这些方块被填充了，之前是空的，现在是有方块的
+                            this.world.notifyLightSet(new BlockPos((this.x << 4) + x, i1, (this.z << 4) + z)); //提醒方块更新
                         }
                     }
                 }
 
-                int k1 = 15;
+                int k1 = 15; //设置最高全局光照强度
 
-                while (j > 0 && k1 > 0)
+                while (j > 0 && k1 > 0) //如果方块没到头，且全局光照强度高于0，也就是还有光照
                 {
-                    --j;
-                    int i2 = this.getBlockLightOpacity(x, j, z);
+                    --j; //下一个方块
+                    int i2 = this.getBlockLightOpacity(x, j, z); //获取不透明度
 
-                    if (i2 == 0)
+                    if (i2 == 0) //如果方块透明
                     {
-                        i2 = 1;
+                        i2 = 1; //设置光照阻碍是1，即使是透明方块，光线也有衰减
                     }
 
-                    k1 -= i2;
+                    k1 -= i2; //当前光照减去阻碍光强
 
-                    if (k1 < 0)
+                    if (k1 < 0) //如果不小心减成了负数
                     {
-                        k1 = 0;
+                        k1 = 0; //变成全黑
                     }
 
-                    ExtendedBlockStorage extendedblockstorage1 = this.storageArrays[j >> 4];
+                    ExtendedBlockStorage extendedblockstorage1 = this.storageArrays[j >> 4]; //取出相应section
 
                     if (extendedblockstorage1 != NULL_BLOCK_STORAGE)
                     {
-                        extendedblockstorage1.setSkyLight(x, j & 15, z, k1);
+                        extendedblockstorage1.setSkyLight(x, j & 15, z, k1); //设置全局光照值
                     }
                 }
             }
 
-            int l1 = this.heightMap[z << 4 | x];
-            int j2 = i;
-            int k2 = l1;
+            int l1 = this.heightMap[z << 4 | x]; //获取现在最高海拔
+            int j2 = i;  //获取之前的最高海拔，作为总海拔
+            int k2 = l1; // 设置新变量存现在最高海拔
 
-            if (l1 < i)
+            if (l1 < i) //如果现在海拔低于之前海拔
             {
-                j2 = l1;
-                k2 = i;
+                j2 = l1; //把最低的现在的海拔设置为总海拔
+                k2 = i; //把
             }
 
             if (l1 < this.heightMapMinimum)
@@ -585,54 +599,78 @@ public class Chunk
         }
     }
 
+    /**
+     * 返回特定坐标的方块的不透明度
+     * @param pos 方块坐标对象
+     * @return 方块不透明度
+     */
     public int getBlockLightOpacity(BlockPos pos)
     {
         return this.getBlockState(pos).getLightOpacity();
     }
 
+    /**
+     * 返回特定坐标的方块的不透明度
+     * @param x x坐标值
+     * @param y y坐标值
+     * @param z z坐标值
+     * @return 方块不透明度
+     */
     private int getBlockLightOpacity(int x, int y, int z)
     {
         return this.getBlockState(x, y, z).getLightOpacity();
     }
 
+    /**
+     * 以BlockPos方式传入方块坐标
+     * @param pos 方块坐标对象
+     * @return IBlockState方块状态对象
+     */
     public IBlockState getBlockState(BlockPos pos)
     {
         return this.getBlockState(pos.getX(), pos.getY(), pos.getZ());
     }
 
+    /**
+     * 返回地图中特定坐标的方块对象
+     * @param x x坐标值
+     * @param y y坐标值
+     * @param z z坐标值
+     * @return IBlockState对象
+     */
     public IBlockState getBlockState(final int x, final int y, final int z)
     {
-        if (this.world.getWorldType() == WorldType.DEBUG_ALL_BLOCK_STATES)
+        if (this.world.getWorldType() == WorldType.DEBUG_ALL_BLOCK_STATES) //如果世界的类型是调试模式
         {
             IBlockState iblockstate = null;
 
-            if (y == 60)
+            if (y == 60) //debug模式中的障碍层
             {
-                iblockstate = Blocks.BARRIER.getDefaultState();
+                iblockstate = Blocks.BARRIER.getDefaultState(); //这一层全是障碍方块，直接返回障碍方块
             }
 
-            if (y == 70)
+            if (y == 70) //debug的展示层
             {
-                iblockstate = ChunkGeneratorDebug.getBlockStateFor(x, z);
+                iblockstate = ChunkGeneratorDebug.getBlockStateFor(x, z);  //从debug模式获取展示的方块
             }
 
-            return iblockstate == null ? Blocks.AIR.getDefaultState() : iblockstate;
+            return iblockstate == null ? Blocks.AIR.getDefaultState() : iblockstate; //空方块以空气方块填充
         }
-        else
+        else //如果不是debug模式
         {
             try
             {
-                if (y >= 0 && y >> 4 < this.storageArrays.length)
+                if (y >= 0 && y >> 4 < this.storageArrays.length) //如果在基岩上面而且方块所在section的id小于本区块的section的数目，也就是16
                 {
-                    ExtendedBlockStorage extendedblockstorage = this.storageArrays[y >> 4];
+                    ExtendedBlockStorage extendedblockstorage = this.storageArrays[y >> 4]; //获取方块所在section
 
                     if (extendedblockstorage != NULL_BLOCK_STORAGE)
                     {
-                        return extendedblockstorage.get(x & 15, y & 15, z & 15);
+                        return extendedblockstorage.get(x & 15, y & 15, z & 15); //获取坐标所指向的方块对象
                     }
                 }
 
-                return Blocks.AIR.getDefaultState();
+                return Blocks.AIR.getDefaultState(); //如果找不到，返回默认值空气
             }
             catch (Throwable throwable)
             {
@@ -653,76 +691,76 @@ public class Chunk
     @Nullable
     public IBlockState setBlockState(BlockPos pos, IBlockState state)
     {
-        int i = pos.getX() & 15;
-        int j = pos.getY();
-        int k = pos.getZ() & 15;
-        int l = k << 4 | i;
+        int i = pos.getX() & 15; //获取x坐标并取到一个chunk以内
+        int j = pos.getY(); //获取y坐标
+        int k = pos.getZ() & 15; //获取x坐标并取到一个chunk以内
+        int l = k << 4 | i; //获取列序号
 
-        if (j >= this.precipitationHeightMap[l] - 1)
+        if (j >= this.precipitationHeightMap[l] - 1) //如果该区块在有降水的方块上面
         {
-            this.precipitationHeightMap[l] = -999;
+            this.precipitationHeightMap[l] = -999; //设置为没降水？？
         }
 
-        int i1 = this.heightMap[l];
-        IBlockState iblockstate = this.getBlockState(pos);
+        int i1 = this.heightMap[l]; //获得列高度
+        IBlockState iblockstate = this.getBlockState(pos); //获得方块状态
 
-        if (iblockstate == state)
+        if (iblockstate == state) //如果是一样的，就不替换了
         {
-            return null;
+            return null; //直接返回null
         }
-        else
+        else //如果不一样
         {
-            Block block = state.getBlock();
-            Block block1 = iblockstate.getBlock();
-            ExtendedBlockStorage extendedblockstorage = this.storageArrays[j >> 4];
-            boolean flag = false;
+            Block block = state.getBlock(); //获得要设置的方块类型
+            Block block1 = iblockstate.getBlock(); //获得存在的方块类型
+            ExtendedBlockStorage extendedblockstorage = this.storageArrays[j >> 4]; //获得方块所在的section
+            boolean flag = false; //
 
-            if (extendedblockstorage == NULL_BLOCK_STORAGE)
+            if (extendedblockstorage == NULL_BLOCK_STORAGE) //如果section为空
             {
-                if (block == Blocks.AIR)
+                if (block == Blocks.AIR) //如果要设置的方块是空气
                 {
-                    return null;
+                    return null; //设置失败，直接返回null
                 }
 
-                extendedblockstorage = new ExtendedBlockStorage(j >> 4 << 4, this.world.provider.hasSkyLight());
-                this.storageArrays[j >> 4] = extendedblockstorage;
-                flag = j >= i1;
+                extendedblockstorage = new ExtendedBlockStorage(j >> 4 << 4, this.world.provider.hasSkyLight()); //新建一个新section,j取一个小于等于j的16的倍数
+                this.storageArrays[j >> 4] = extendedblockstorage; //设置新section
+                flag = j >= i1; //方块是否在最高高度上面
             }
 
-            extendedblockstorage.set(i, j & 15, k, state);
+            extendedblockstorage.set(i, j & 15, k, state);//设置方块状态
 
-            if (block1 != block)
+            if (block1 != block) //如果新旧方块类型不一样
             {
-                if (!this.world.isRemote)
+                if (!this.world.isRemote) //是否是服务端世界
                 {
-                    block1.breakBlock(this.world, pos, iblockstate);
+                    block1.breakBlock(this.world, pos, iblockstate);//TODO: 不知道啥意思
                 }
-                else if (block1 instanceof ITileEntityProvider)
+                else if (block1 instanceof ITileEntityProvider) //是客户端世界且方块是ITileEntity？？？
                 {
-                    this.world.removeTileEntity(pos);
+                    this.world.removeTileEntity(pos); //去除这个实体
                 }
             }
 
-            if (extendedblockstorage.get(i, j & 15, k).getBlock() != block)
+            if (extendedblockstorage.get(i, j & 15, k).getBlock() != block)  //如果这个方块不是新方块，代表替换失败了？？？
             {
-                return null;
+                return null; //直接返回null
             }
-            else
+            else //如果替换成功了
             {
-                if (flag)
+                if (flag) //如果方块在最高海拔之上，
                 {
-                    this.generateSkylightMap();
+                    this.generateSkylightMap(); //重新加载全局光照
                 }
-                else
+                else //如果不是
                 {
-                    int j1 = state.getLightOpacity();
-                    int k1 = iblockstate.getLightOpacity();
+                    int j1 = state.getLightOpacity(); //获得新方块不透明度
+                    int k1 = iblockstate.getLightOpacity(); //获得旧方块不透明度
 
-                    if (j1 > 0)
+                    if (j1 > 0) //如果旧的方块不是透明的
                     {
-                        if (j >= i1)
+                        if (j >= i1) //如果方块在最高海拔上面
                         {
-                            this.relightBlock(i, j + 1, k);
+                            this.relightBlock(i, j + 1, k); //
                         }
                     }
                     else if (j == i1 - 1)
@@ -773,24 +811,33 @@ public class Chunk
         }
     }
 
+    /**
+     * 根据方块类型返回亮度
+     * 如果是空的，返回默认值
+     * 如果是天空，返回全局光照
+     * 如果是方块，返回局部光照
+     * @param type 方块类型
+     * @param pos 坐标对象
+     * @return 亮度值
+     */
     public int getLightFor(EnumSkyBlock type, BlockPos pos)
     {
-        int i = pos.getX() & 15;
+        int i = pos.getX() & 15; //取 0-15之间，也就是一个section底面以内
         int j = pos.getY();
-        int k = pos.getZ() & 15;
-        ExtendedBlockStorage extendedblockstorage = this.storageArrays[j >> 4];
+        int k = pos.getZ() & 15; //取 0-15之间，也就是一个section底面以内
+        ExtendedBlockStorage extendedblockstorage = this.storageArrays[j >> 4]; //得到所在section
 
         if (extendedblockstorage == NULL_BLOCK_STORAGE)
         {
-            return this.canSeeSky(pos) ? type.defaultLightValue : 0;
+            return this.canSeeSky(pos) ? type.defaultLightValue : 0; //如果能看见天空，就返回默认的光亮值，如果看不见，就返回0
         }
         else if (type == EnumSkyBlock.SKY)
         {
-            return !this.world.provider.hasSkyLight() ? 0 : extendedblockstorage.getSkyLight(i, j & 15, k);
+            return !this.world.provider.hasSkyLight() ? 0 : extendedblockstorage.getSkyLight(i, j & 15, k);//从section获得sky light
         }
         else
         {
-            return type == EnumSkyBlock.BLOCK ? extendedblockstorage.getBlockLight(i, j & 15, k) : type.defaultLightValue;
+            return type == EnumSkyBlock.BLOCK ? extendedblockstorage.getBlockLight(i, j & 15, k) : type.defaultLightValue;//如果是一个block，就从block处返回局部光照，否则返回默认的光照
         }
     }
 
@@ -830,22 +877,22 @@ public class Chunk
         int k = pos.getZ() & 15;
         ExtendedBlockStorage extendedblockstorage = this.storageArrays[j >> 4];
 
-        if (extendedblockstorage == NULL_BLOCK_STORAGE)
+        if (extendedblockstorage == NULL_BLOCK_STORAGE) //如果section为空，就从worlc里获取skylight
         {
-            return this.world.provider.hasSkyLight() && amount < EnumSkyBlock.SKY.defaultLightValue ? EnumSkyBlock.SKY.defaultLightValue - amount : 0;
+            return this.world.provider.hasSkyLight() && amount < EnumSkyBlock.SKY.defaultLightValue ? EnumSkyBlock.SKY.defaultLightValue - amount : 0; //有sky light且够减的话就返回减去的值，如果不是的话返回0
         }
-        else
+        else //如果有section
         {
-            int l = !this.world.provider.hasSkyLight() ? 0 : extendedblockstorage.getSkyLight(i, j & 15, k);
-            l = l - amount;
-            int i1 = extendedblockstorage.getBlockLight(i, j & 15, k);
+            int l = !this.world.provider.hasSkyLight() ? 0 : extendedblockstorage.getSkyLight(i, j & 15, k); //通过section获得全局光照
+            l = l - amount;//减去衰减值
+            int i1 = extendedblockstorage.getBlockLight(i, j & 15, k); //通过block获得局部光照
 
-            if (i1 > l)
+            if (i1 > l) //如果局部光照比全局光照还小
             {
-                l = i1;
+                l = i1; //就取全局光照
             }
 
-            return l;
+            return l; //总之就是选择全局光照折损之后的与局部光照之间的最小值
         }
     }
 
@@ -909,12 +956,17 @@ public class Chunk
         this.entityLists[index].remove(entityIn);
     }
 
+    /**
+     * 判断一个区块是否能够看见天空
+     * @param pos 区块的位置对象
+     * @return 能就返回true，否则返回false
+     */
     public boolean canSeeSky(BlockPos pos)
     {
         int i = pos.getX() & 15;
         int j = pos.getY();
         int k = pos.getZ() & 15;
-        return j >= this.heightMap[k << 4 | i];
+        return j >= this.heightMap[k << 4 | i]; //取出该列的最高值，如果比最高值还大，说明能看见天空，否则看不见
     }
 
     @Nullable
@@ -926,29 +978,29 @@ public class Chunk
     }
 
     @Nullable
-    public TileEntity getTileEntity(BlockPos pos, Chunk.EnumCreateEntityType p_177424_2_)
+    public TileEntity getTileEntity(BlockPos pos, Chunk.EnumCreateEntityType createType)
     {
-        TileEntity tileentity = this.tileEntities.get(pos);
+        TileEntity tileentity = this.tileEntities.get(pos);  //获得tile 实体
 
-        if (tileentity == null)
+        if (tileentity == null) //如果实体是空，要创建
         {
-            if (p_177424_2_ == Chunk.EnumCreateEntityType.IMMEDIATE)
+            if (createType == Chunk.EnumCreateEntityType.IMMEDIATE)  //如果创建实体的类型是立即
             {
-                tileentity = this.createNewTileEntity(pos);
-                this.world.setTileEntity(pos, tileentity);
+                tileentity = this.createNewTileEntity(pos); //新建实体
+                this.world.setTileEntity(pos, tileentity); //设置实体
             }
-            else if (p_177424_2_ == Chunk.EnumCreateEntityType.QUEUED)
+            else if (createType == Chunk.EnumCreateEntityType.QUEUED) //如果创建实体的类型是排队
             {
-                this.tileEntityPosQueue.add(pos);
+                this.tileEntityPosQueue.add(pos); //把它的位置对象加入到队列中取
             }
         }
-        else if (tileentity.isInvalid())
+        else if (tileentity.isInvalid())  //如果不为空且是失效的
         {
-            this.tileEntities.remove(pos);
-            return null;
+            this.tileEntities.remove(pos); //去除实体
+            return null; //返回空
         }
 
-        return tileentity;
+        return tileentity; //返回实体
     }
 
     public void addTileEntity(TileEntity tileEntityIn)
@@ -1007,19 +1059,20 @@ public class Chunk
 
     /**
      * Called when this Chunk is unloaded by the ChunkProvider
+     * 卸载chunk
      */
     public void onUnload()
     {
-        this.loaded = false;
+        this.loaded = false; //设置已加载标志位为false
 
         for (TileEntity tileentity : this.tileEntities.values())
         {
-            this.world.markTileEntityForRemoval(tileentity);
+            this.world.markTileEntityForRemoval(tileentity); //将指定的TileEntity添加到挂起的删除列表中。
         }
 
         for (ClassInheritanceMultiMap<Entity> classinheritancemultimap : this.entityLists)
         {
-            this.world.unloadEntities(classinheritancemultimap);
+            this.world.unloadEntities(classinheritancemultimap); //将指定的Entity添加到列表中。
         }
     }
 
@@ -1033,6 +1086,7 @@ public class Chunk
 
     /**
      * Fills the given list of all entities that intersect within the given bounding box that aren't the passed entity.
+     * 填充给定边界框内相交但不是传递实体的所有实体的给定列表。
      */
     public void getEntitiesWithinAABBForEntity(@Nullable Entity entityIn, AxisAlignedBB aabb, List<Entity> listToFill, Predicate <? super Entity > filter)
     {
@@ -1083,9 +1137,9 @@ public class Chunk
         {
             for (T t : this.entityLists[k].getByClass(entityClass))
             {
-                if (t.getEntityBoundingBox().intersects(aabb) && (filter == null || filter.apply(t)))
+                if (t.getEntityBoundingBox().intersects(aabb) && (filter == null || filter.apply(t))) //如果选到的区域与aabb重叠且通过了过滤
                 {
-                    listToFill.add(t);
+                    listToFill.add(t); //就把它加入到列表中
                 }
             }
         }
@@ -1111,6 +1165,12 @@ public class Chunk
         return this.dirty;
     }
 
+    /**
+     * 使用地图种子生成chunk的随机数
+     * 随机数与输入的种子，区块的x，z有关
+     * @param seed 地图种子
+     * @return 随机数变量
+     */
     public Random getRandomWithSeed(long seed)
     {
         return new Random(this.world.getSeed() + (long)(this.x * this.x * 4987142) + (long)(this.x * 5947611) + (long)(this.z * this.z) * 4392871L + (long)(this.z * 389711) ^ seed);
@@ -1175,31 +1235,31 @@ public class Chunk
     {
         int i = pos.getX() & 15;
         int j = pos.getZ() & 15;
-        int k = i | j << 4;
-        BlockPos blockpos = new BlockPos(pos.getX(), this.precipitationHeightMap[k], pos.getZ());
+        int k = i | j << 4; //根据x，z轴获得在一个chunk平面的序号
+        BlockPos blockpos = new BlockPos(pos.getX(), this.precipitationHeightMap[k], pos.getZ()); //根据方块的x，z和降水高度获得接收到降水的区块的位置
 
-        if (blockpos.getY() == -999)
+        if (blockpos.getY() == -999) //TODO: 这啥意思？？
         {
-            int l = this.getTopFilledSegment() + 15;
-            blockpos = new BlockPos(pos.getX(), l, pos.getZ());
-            int i1 = -1;
+            int l = this.getTopFilledSegment() + 15; //取最顶端section的上一个section的方块
+            blockpos = new BlockPos(pos.getX(), l, pos.getZ()); //获取该方块的位置对象
+            int i1 = -1; //定义初始降水高度
 
-            while (blockpos.getY() > 0 && i1 == -1)
+            while (blockpos.getY() > 0 && i1 == -1) //如果方块存在且刚刚开始
             {
-                IBlockState iblockstate = this.getBlockState(blockpos);
-                Material material = iblockstate.getMaterial();
+                IBlockState iblockstate = this.getBlockState(blockpos); //获得方块
+                Material material = iblockstate.getMaterial(); //获得材质
 
-                if (!material.blocksMovement() && !material.isLiquid())
+                if (!material.blocksMovement() && !material.isLiquid()) //如果方块不是固体且方块不是液体
                 {
-                    blockpos = blockpos.down();
+                    blockpos = blockpos.down(); //那就是空的呗，位置下降一格，大概是模拟雨滴下降的动作吧
                 }
-                else
+                else //如果是固体或者是液体，雨滴收到了遮挡
                 {
-                    i1 = blockpos.getY() + 1;
+                    i1 = blockpos.getY() + 1; //降水高度应该是接触方块的上面一格
                 }
             }
 
-            this.precipitationHeightMap[k] = i1;
+            this.precipitationHeightMap[k] = i1; //把降水高度赋值给列表
         }
 
         return new BlockPos(pos.getX(), this.precipitationHeightMap[k], pos.getZ());
@@ -1354,19 +1414,19 @@ public class Chunk
 
     public Biome getBiome(BlockPos pos, BiomeProvider provider)
     {
-        int i = pos.getX() & 15;
-        int j = pos.getZ() & 15;
-        int k = this.blockBiomeArray[j << 4 | i] & 255;
+        int i = pos.getX() & 15; //获取方块的x坐标，与上15，使之在一个chunk内
+        int j = pos.getZ() & 15; //获取方块的z坐标，与上15，使之在一个chunk内
+        int k = this.blockBiomeArray[j << 4 | i] & 255; //获取一个点的生物群系id
 
-        if (k == 255)
+        if (k == 255) //
         {
-            Biome biome = provider.getBiome(pos, Biomes.PLAINS);
-            k = Biome.getIdForBiome(biome);
-            this.blockBiomeArray[j << 4 | i] = (byte)(k & 255);
+            Biome biome = provider.getBiome(pos, Biomes.PLAINS);  //从坐标里获得生物群系，默认群系为平原
+            k = Biome.getIdForBiome(biome); //获得生物群系id
+            this.blockBiomeArray[j << 4 | i] = (byte)(k & 255); //重新赋值生物群系id
         }
 
-        Biome biome1 = Biome.getBiome(k);
-        return biome1 == null ? Biomes.PLAINS : biome1;
+        Biome biome1 = Biome.getBiome(k); //获得生物群系
+        return biome1 == null ? Biomes.PLAINS : biome1; //返回生物群系，如果是空，返回默认的平原
     }
 
     /**

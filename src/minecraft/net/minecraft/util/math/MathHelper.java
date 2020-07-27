@@ -83,6 +83,8 @@ public class MathHelper
 
     /**
      * Returns the greatest integer less than or equal to the double argument
+     * 返回小于或等于双精度参数的最大整数
+     * 向下取整
      */
     public static int floor(double value)
     {
@@ -132,6 +134,7 @@ public class MathHelper
     /**
      * Returns the value of the first parameter, clamped to be within the lower and upper limits given by the second and
      * third parameters.
+     * 如果num处于min和max之间，返回num，如果在左边，返回min，如果在右边，返回max
      */
     public static int clamp(int num, int min, int max)
     {

@@ -101,7 +101,7 @@ public class EmptyChunk extends Chunk
     }
 
     @Nullable
-    public TileEntity getTileEntity(BlockPos pos, Chunk.EnumCreateEntityType p_177424_2_)
+    public TileEntity getTileEntity(BlockPos pos, Chunk.EnumCreateEntityType createType)
     {
         return null;
     }

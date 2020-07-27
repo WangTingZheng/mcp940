@@ -677,6 +677,7 @@ public class Block
 
     /**
      * Called serverside after this block is replaced with another in Chunk, but before the Tile Entity is updated
+     * 当中国方块被其它方块替换但是tile实体已经被更新时，在服务端被调用
      */
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
     {

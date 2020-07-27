@@ -2821,6 +2821,7 @@ public abstract class Entity implements ICommandSender
 
     /**
      * Return the Entity parts making up this Entity (currently only for dragons)
+     * 返回组成此实体的实体部分（目前仅适用于dragons）
      */
     public Entity[] getParts()
     {

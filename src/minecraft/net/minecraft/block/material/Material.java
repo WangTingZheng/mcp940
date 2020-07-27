@@ -107,6 +107,7 @@ public class Material
 
     /**
      * Returns if this material is considered solid or not
+     * 返回此材质是否为实心
      */
     public boolean blocksMovement()
     {

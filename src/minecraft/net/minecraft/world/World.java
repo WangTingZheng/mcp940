@@ -138,6 +138,7 @@ public abstract class World implements IBlockAccess
     /**
      * True if the world is a 'slave' client; changes will not be saved or propagated from this world. For example,
      * server worlds have this set to false, client worlds have this set to true.
+     * 当世界是从属客户端时候为true，变化将不会被保存或者从这个世界传播进来，举个例子，服务端世界被设置为false，客户端世界被设置为true
      */
     public final boolean isRemote;
 
@@ -2492,6 +2493,7 @@ public abstract class World implements IBlockAccess
 
     /**
      * Adds the specified TileEntity to the pending removal list.
+     * 将指定的TileEntity添加到挂起的删除列表中。
      */
     public void markTileEntityForRemoval(TileEntity tileEntityIn)
     {
