@@ -843,30 +843,30 @@ public class Chunk
 
     public void setLightFor(EnumSkyBlock type, BlockPos pos, int value)
     {
-        int i = pos.getX() & 15;
-        int j = pos.getY();
-        int k = pos.getZ() & 15;
-        ExtendedBlockStorage extendedblockstorage = this.storageArrays[j >> 4];
+        int i = pos.getX() & 15; //获取x坐标并转化为一个chunk内的
+        int j = pos.getY(); //获得y坐标
+        int k = pos.getZ() & 15; //获取x坐标并转化为一个chunk内的
+        ExtendedBlockStorage extendedblockstorage = this.storageArrays[j >> 4]; //获取方块所在section
 
-        if (extendedblockstorage == NULL_BLOCK_STORAGE)
+        if (extendedblockstorage == NULL_BLOCK_STORAGE) //如果section是空的
         {
-            extendedblockstorage = new ExtendedBlockStorage(j >> 4 << 4, this.world.provider.hasSkyLight());
-            this.storageArrays[j >> 4] = extendedblockstorage;
-            this.generateSkylightMap();
+            extendedblockstorage = new ExtendedBlockStorage(j >> 4 << 4, this.world.provider.hasSkyLight()); //新建一个section
+            this.storageArrays[j >> 4] = extendedblockstorage; //赋值section到section数组
+            this.generateSkylightMap(); //重新生成全局光照map
         }
 
-        this.dirty = true;
+        this.dirty = true; //设置chunk为脏
 
-        if (type == EnumSkyBlock.SKY)
+        if (type == EnumSkyBlock.SKY) //如果方块是天空的话
         {
-            if (this.world.provider.hasSkyLight())
+            if (this.world.provider.hasSkyLight()) //有全局光照
             {
-                extendedblockstorage.setSkyLight(i, j & 15, k, value);
+                extendedblockstorage.setSkyLight(i, j & 15, k, value); //设置全局光照
             }
         }
-        else if (type == EnumSkyBlock.BLOCK)
+        else if (type == EnumSkyBlock.BLOCK) //如果是方块
         {
-            extendedblockstorage.setBlockLight(i, j & 15, k, value);
+            extendedblockstorage.setBlockLight(i, j & 15, k, value);//设置局部光照
         }
     }
 
@@ -887,12 +887,12 @@ public class Chunk
             l = l - amount;//减去衰减值
             int i1 = extendedblockstorage.getBlockLight(i, j & 15, k); //通过block获得局部光照
 
-            if (i1 > l) //如果局部光照比全局光照还小
+            if (i1 > l) //如果局部光照比全局光照还大
             {
-                l = i1; //就取全局光照
+                l = i1; //就取局部光照
             }
 
-            return l; //总之就是选择全局光照折损之后的与局部光照之间的最小值
+            return l; //总之就是选择全局光照折损之后的与局部光照之间的最大值
         }
     }
 
@@ -1240,7 +1240,7 @@ public class Chunk
 
         if (blockpos.getY() == -999) //TODO: 这啥意思？？
         {
-            int l = this.getTopFilledSegment() + 15; //取最顶端section的上一个section的方块
+            int l = this.getTopFilledSegment() + 15; //取最上面非空section的最上面一层方块
             blockpos = new BlockPos(pos.getX(), l, pos.getZ()); //获取该方块的位置对象
             int i1 = -1; //定义初始降水高度
 
@@ -1258,7 +1258,7 @@ public class Chunk
                     i1 = blockpos.getY() + 1; //降水高度应该是接触方块的上面一格
                 }
             }
-
+            //如果你想获得0层以及0层以下的降水高度，那么降水高度是-1
             this.precipitationHeightMap[k] = i1; //把降水高度赋值给列表
         }
 
@@ -1316,38 +1316,38 @@ public class Chunk
      */
     public boolean isEmptyBetween(int startY, int endY)
     {
-        if (startY < 0)
+        if (startY < 0) //如果给的是基岩以下
         {
-            startY = 0;
+            startY = 0; //就算是基岩开始的
         }
 
-        if (endY >= 256)
+        if (endY >= 256) //如果终点超过了最大值
         {
-            endY = 255;
+            endY = 255; //设置最大值
         }
 
-        for (int i = startY; i <= endY; i += 16)
+        for (int i = startY; i <= endY; i += 16) //遍历之间的方块
         {
-            ExtendedBlockStorage extendedblockstorage = this.storageArrays[i >> 4];
+            ExtendedBlockStorage extendedblockstorage = this.storageArrays[i >> 4]; //取得方块所在的section
 
-            if (extendedblockstorage != NULL_BLOCK_STORAGE && !extendedblockstorage.isEmpty())
+            if (extendedblockstorage != NULL_BLOCK_STORAGE && !extendedblockstorage.isEmpty()) //如果方块section存在且不是空的
             {
-                return false;
+                return false; //返回false
             }
         }
 
-        return true;
+        return true;//返回true
     }
 
     public void setStorageArrays(ExtendedBlockStorage[] newStorageArrays)
     {
-        if (this.storageArrays.length != newStorageArrays.length)
+        if (this.storageArrays.length != newStorageArrays.length) //如果长度不一样
         {
-            LOGGER.warn("Could not set level chunk sections, array length is {} instead of {}", Integer.valueOf(newStorageArrays.length), Integer.valueOf(this.storageArrays.length));
+            LOGGER.warn("Could not set level chunk sections, array length is {} instead of {}", Integer.valueOf(newStorageArrays.length), Integer.valueOf(this.storageArrays.length)); //warning一下
         }
         else
         {
-            System.arraycopy(newStorageArrays, 0, this.storageArrays, 0, this.storageArrays.length);
+            System.arraycopy(newStorageArrays, 0, this.storageArrays, 0, this.storageArrays.length); //拷贝数组
         }
     }
 
@@ -1553,12 +1553,12 @@ public class Chunk
 
     private void setSkylightUpdated()
     {
-        for (int i = 0; i < this.updateSkylightColumns.length; ++i)
+        for (int i = 0; i < this.updateSkylightColumns.length; ++i) //遍历整个updateSkylightColumns
         {
-            this.updateSkylightColumns[i] = true;
+            this.updateSkylightColumns[i] = true; //设置为true
         }
 
-        this.recheckGaps(false);
+        this.recheckGaps(false); //重新计算gaps？？TODO 不知道啥意思
     }
 
     private void checkLightSide(EnumFacing facing)
@@ -1658,13 +1658,13 @@ public class Chunk
 
     public void setHeightMap(int[] newHeightMap)
     {
-        if (this.heightMap.length != newHeightMap.length)
+        if (this.heightMap.length != newHeightMap.length) //如果长度不一样
         {
-            LOGGER.warn("Could not set level chunk heightmap, array length is {} instead of {}", Integer.valueOf(newHeightMap.length), Integer.valueOf(this.heightMap.length));
+            LOGGER.warn("Could not set level chunk heightmap, array length is {} instead of {}", Integer.valueOf(newHeightMap.length), Integer.valueOf(this.heightMap.length)); //报warning
         }
         else
         {
-            System.arraycopy(newHeightMap, 0, this.heightMap, 0, this.heightMap.length);
+            System.arraycopy(newHeightMap, 0, this.heightMap, 0, this.heightMap.length); //拷贝数组
         }
     }
 

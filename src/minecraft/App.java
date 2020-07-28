@@ -1,7 +1,11 @@
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+import net.minecraft.world.chunk.Chunk;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Random;
 import javax.swing.*;
 
 /**
@@ -12,8 +16,8 @@ import javax.swing.*;
 public class App {
 
     public static void main(String[] args) {
-        for (int i = 0; i < 255; i++) {
-            System.out.println("i = " +i + ", i <<4>>4 = "+ (i>>4<<4));
-        }
+        Random random = new Random(101000L);
+        System.out.println(random.nextInt(10));
+
     }
 }
